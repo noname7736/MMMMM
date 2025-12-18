@@ -1,10 +1,11 @@
 
 export interface ServerStatus {
   name: string;
-  type: 'Dell PowerEdge' | 'HPE ProLiant' | 'IBM Storage';
-  status: 'Online' | 'Warning' | 'Locked';
+  type: 'Dell PowerEdge' | 'HPE ProLiant' | 'IBM Storage' | 'Bot Cluster' | 'Game Node' | 'Gateway Core' | 'VPS Hypervisor';
+  status: 'Online' | 'Warning' | 'Locked' | 'Optimizing' | 'Hyper-Ready' | 'Converged';
   load: number;
   uptime: string;
+  specialization?: string;
 }
 
 export interface EnforcementLog {
@@ -13,7 +14,7 @@ export interface EnforcementLog {
   target: string;
   action: string;
   result: string;
-  severity: 'low' | 'medium' | 'high' | 'absolute' | 'super-max';
+  severity: 'low' | 'medium' | 'high' | 'absolute' | 'super-max' | 'omega' | 'sovereign';
 }
 
 export interface SystemRule {
@@ -25,16 +26,26 @@ export interface SystemRule {
 export interface PropertyMod {
   id: string;
   name: string;
-  type: 'Asset' | 'Social' | 'Structural';
-  status: 'Deployed' | 'Optimizing' | 'Absolute';
+  type: 'Asset' | 'Social' | 'Structural' | 'Service' | 'Economic' | 'Digital';
+  status: 'Deployed' | 'Optimizing' | 'Absolute' | 'Active' | 'Dominated';
   integrity: number;
+  description?: string;
 }
 
 export interface PenaltyCard {
   id: string;
-  type: 'YELLOW' | 'RED';
+  type: 'YELLOW' | 'RED' | 'BLACK';
   subject: string;
   reason: string;
-  weight: 'Light' | 'Heavy';
+  weight: 'Light' | 'Heavy' | 'Absolute' | 'Eternal';
   timestamp: string;
+}
+
+export interface TechService {
+  id: string;
+  title: string;
+  category: 'Infrastructure' | 'Development' | 'Automation' | 'Design' | 'Special' | 'Economy' | 'Convergence';
+  features: string[];
+  status: 'Available' | 'Enterprise Only' | 'Absolute' | 'Exclusive' | 'Sovereign';
+  icon?: string;
 }

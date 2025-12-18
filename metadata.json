@@ -1,5 +1,8 @@
 {
-  "name": "Absolute Sovereignty: SUPER 3MAX PRO DE PRO PLUS",
-  "description": "THE ALL-SEEING OMNISCIENCE MODE. Eternal synchronization, total behavioral transparency, and absolute command saturation.",
-  "requestFramePermissions": []
+  "name": "SUPER 3MAX PRO DE PRO PLUS | OMNISCIENCE SOVEREIGNTY",
+  "description": "The Final Technical Blueprint. Absolute command, total behavioral saturation, and 100% digital-reality convergence.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
 }
