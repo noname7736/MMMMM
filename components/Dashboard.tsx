@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { Activity, ShieldAlert, CheckCircle2, AlertTriangle, UserX } from 'lucide-react';
+import { Activity, ShieldAlert, CheckCircle2, AlertTriangle, UserX, FileCode, ShieldCheck } from 'lucide-react';
 
 const data = [
   { name: '00:00', compliance: 92, load: 45 },
@@ -31,15 +31,17 @@ const Dashboard: React.FC = () => {
     <div className="space-y-8 animate-in fade-in duration-1000">
       <div className="flex justify-between items-center mb-4">
         <div>
-          <h2 className="text-3xl font-black text-white italic tracking-tighter uppercase">System Command Overview</h2>
-          <p className="text-zinc-500 text-sm font-medium">Real-time monitoring of Absolute Enforcement Framework stability.</p>
+          <h2 className="text-4xl font-black text-white italic tracking-tighter uppercase">Absolute Command Dashboard</h2>
+          <p className="text-zinc-500 text-sm font-medium">Monitoring Absolute Enforcement and Code Integrity.</p>
         </div>
         <div className="flex gap-4">
-          <div className="px-5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-2xl text-[10px] font-black text-green-400 shadow-[0_0_15px_rgba(34,197,94,0.1)]">
-            HPE ENFORCEMENT: ACTIVE
+          <div className="px-5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-2xl text-[10px] font-black text-indigo-400 shadow-[0_0_15px_rgba(99,102,241,0.1)] flex items-center gap-2">
+            <FileCode className="w-3 h-3" />
+            CODE INTEGRITY: 100%
           </div>
-          <div className="px-5 py-2.5 bg-zinc-900 border border-zinc-800 rounded-2xl text-[10px] font-black text-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.1)]">
-            DELL POWEREDGE: OPTIMAL
+          <div className="px-5 py-2.5 bg-green-950/20 border border-green-500/30 rounded-2xl text-[10px] font-black text-green-400 shadow-[0_0_15px_rgba(34,197,94,0.1)] flex items-center gap-2">
+            <ShieldCheck className="w-3 h-3" />
+            SYSTEM SANCTITY: ABSOLUTE
           </div>
         </div>
       </div>
@@ -47,7 +49,7 @@ const Dashboard: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard title="Overall Compliance" value="99.8%" icon={CheckCircle2} color="text-green-500" />
         <StatCard title="Soul-Link Status" value="LOCKED" icon={Activity} color="text-indigo-500" detail="MAX_PRESSURE" />
-        <StatCard title="Penalty Cards" value="05" icon={UserX} color="text-red-600" detail="PRATUAN_BLOCKED" />
+        <StatCard title="File Integrity" value="SOLID" icon={FileCode} color="text-blue-400" detail="NO_DESTRUCTION" />
         <StatCard title="Infrastructure Load" value="42.5%" icon={AlertTriangle} color="text-blue-500" detail="HPE_OPTIMAL" />
       </div>
 

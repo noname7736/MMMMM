@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Shield, Activity, HardDrive, Users, Zap, Terminal, Share2, Box, Cpu, Ghost, Sparkles, AlertTriangle, XCircle } from 'lucide-react';
+import { Shield, Activity, HardDrive, Users, Zap, Terminal, Share2, Box, Cpu, Ghost, Sparkles, AlertTriangle, XCircle, FileCode } from 'lucide-react';
 import { SystemRule, PenaltyCard } from './types';
 
 export const SYSTEM_RULES: SystemRule[] = [
@@ -18,6 +18,11 @@ export const SYSTEM_RULES: SystemRule[] = [
     subject: "Audit-Before-Payment",
     movement: "Financial Transaction",
     logic: "SOVEREIGN AUDIT: ระบบจะตรวจสอบรายละเอียดพฤติกรรมและความถูกต้องทุกอย่าง 100% ก่อนทำการจ่ายเงิน หากพบความผิดปกติในประวัติการคุยจะไม่มีการโอน"
+  },
+  {
+    subject: "Immutable Code Sovereignty",
+    movement: "Source Code Integrity Check",
+    logic: "UNBREAKABLE-LEDGER: โค้ดและกฎระเบียบถูกบันทึกลงใน Silicon Root of Trust ห้ามทำลาย ห้ามแก้ไข และห้ามลบโดยเด็ดขาด (ความสมบูรณ์ 100%)"
   },
   {
     subject: "นางสาว ประทวน อุบลพีช",

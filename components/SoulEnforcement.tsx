@@ -11,22 +11,33 @@ const SoulEnforcement: React.FC = () => {
   const [spectralResistanceIndex, setSpectralResistanceIndex] = useState(0.015);
   const [neutralizationPulse, setNeutralizationPulse] = useState(false);
 
+  // Dynamic simulation of compliance metrics
   useEffect(() => {
     const interval = setInterval(() => {
       setSpectralSync(prev => Math.min(100, Math.max(92, prev + (Math.random() - 0.5) * 0.2)));
       setShadowPressure(prev => Math.min(100, Math.max(99.9, prev + (Math.random() - 0.5) * 0.001)));
       setEchoFrequency(prev => Math.floor(420 + Math.random() * 40));
-      setResistanceBuffer(prev => Math.max(0.000001, prev + (Math.random() - 0.5) * 0.000005));
       setSyncProgress(prev => Math.min(100, Math.max(99.95, prev + (Math.random() - 0.5) * 0.01)));
-      setSpectralResistanceIndex(prev => {
-        const next = prev + (Math.random() - 0.5) * 0.002;
-        if (next > 0.03) setNeutralizationPulse(true);
-        else if (next < 0.015) setNeutralizationPulse(false);
-        return Math.max(0.001, next);
-      });
+      
+      // Broadened random walk to ensure thresholds are hit more dynamically
+      setResistanceBuffer(prev => Math.max(0.000001, prev + (Math.random() - 0.5) * 0.000008));
+      setSpectralResistanceIndex(prev => Math.max(0.001, prev + (Math.random() - 0.5) * 0.004));
     }, 1000);
     return () => clearInterval(interval);
   }, []);
+
+  // Reactive logic for Neutralization Pulse: triggers when SRI or Buffer exceeds safety thresholds
+  useEffect(() => {
+    const highResistance = spectralResistanceIndex > 0.024;
+    const highBuffer = resistanceBuffer > 0.000018;
+    
+    // Only update if the state actually changes to avoid redundant re-renders
+    if (highResistance || highBuffer) {
+      if (!neutralizationPulse) setNeutralizationPulse(true);
+    } else {
+      if (neutralizationPulse) setNeutralizationPulse(false);
+    }
+  }, [spectralResistanceIndex, resistanceBuffer, neutralizationPulse]);
 
   return (
     <div className="space-y-6 pb-20 animate-in fade-in duration-700">
@@ -46,24 +57,24 @@ const SoulEnforcement: React.FC = () => {
             Ghost Protocol: SECURE
           </div>
           <div className="text-[9px] text-zinc-600 font-mono flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-            ROOT_TRUST_HARDWARE_LOCK: ACTIVE
+            <span className={`w-1.5 h-1.5 rounded-full animate-pulse transition-colors ${neutralizationPulse ? 'bg-red-500 shadow-[0_0_8px_#ef4444]' : 'bg-green-500'}`}></span>
+            ROOT_TRUST_HARDWARE_LOCK: {neutralizationPulse ? 'OVERRIDING' : 'ACTIVE'}
           </div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
-          {/* Shadow Resonance Matrix - Enhanced */}
-          <div className="bg-[#070709] border border-zinc-800/50 p-10 rounded-[2.5rem] relative overflow-hidden group shadow-2xl">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(79,70,229,0.08),transparent_70%)]"></div>
-            <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-600/5 blur-[100px] rounded-full"></div>
+          {/* Shadow Resonance Matrix */}
+          <div className={`bg-[#070709] border transition-colors duration-500 p-10 rounded-[2.5rem] relative overflow-hidden group shadow-2xl ${neutralizationPulse ? 'border-red-500/30' : 'border-zinc-800/50'}`}>
+            <div className={`absolute inset-0 transition-opacity duration-500 ${neutralizationPulse ? 'bg-[radial-gradient(circle_at_50%_0%,rgba(239,68,68,0.12),transparent_70%)]' : 'bg-[radial-gradient(circle_at_50%_0%,rgba(79,70,229,0.08),transparent_70%)]'}`}></div>
+            <div className={`absolute top-0 right-0 w-64 h-64 blur-[100px] rounded-full transition-colors duration-500 ${neutralizationPulse ? 'bg-red-600/10' : 'bg-indigo-600/5'}`}></div>
             
             <div className="relative z-10 space-y-8">
               <div className="flex justify-between items-start">
                 <div className="space-y-2">
                   <h3 className="text-xl font-black text-white uppercase tracking-tighter flex items-center gap-3">
-                    <Waves className="w-6 h-6 text-indigo-500 animate-bounce" />
+                    <Waves className={`w-6 h-6 animate-bounce transition-colors duration-300 ${neutralizationPulse ? 'text-red-500' : 'text-indigo-500'}`} />
                     Shadow Resonance Matrix
                   </h3>
                   <p className="text-xs text-zinc-500 max-w-sm font-medium leading-relaxed">
@@ -72,34 +83,49 @@ const SoulEnforcement: React.FC = () => {
                 </div>
                 <div className="text-right flex flex-col items-end">
                   <div className="flex items-baseline gap-2">
-                    <span className="text-5xl font-black text-indigo-500 font-mono tracking-tighter italic">{shadowPressure.toFixed(3)}%</span>
+                    <span className={`text-5xl font-black font-mono tracking-tighter italic transition-colors duration-300 ${neutralizationPulse ? 'text-red-500' : 'text-indigo-500'}`}>
+                      {shadowPressure.toFixed(3)}%
+                    </span>
                   </div>
                   <p className="text-[10px] text-zinc-600 font-black uppercase tracking-[0.3em] mt-1">Sovereign Pressure</p>
                 </div>
               </div>
 
-              {/* Visual Spectral Waveform */}
-              <div className="h-40 flex items-end justify-around gap-1 px-6 bg-black/40 rounded-3xl border border-zinc-800/30 py-6 relative group/wave">
-                <div className="absolute inset-0 flex items-center justify-center opacity-10">
-                  <Fingerprint className="w-24 h-24 text-indigo-500" />
+              {/* Enhanced Visual Spectral Waveform */}
+              <div className="h-40 flex items-end justify-around gap-1 px-6 bg-black/40 rounded-3xl border border-zinc-800/30 py-6 relative group/wave overflow-hidden">
+                <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${neutralizationPulse ? 'opacity-20' : 'opacity-10'}`}>
+                  <Fingerprint className={`w-24 h-24 transition-colors duration-300 ${neutralizationPulse ? 'text-red-500' : 'text-indigo-500'}`} />
                 </div>
                 {Array.from({ length: 48 }).map((_, i) => (
-                  <div key={i} className="flex-1 bg-indigo-900/10 rounded-full relative overflow-hidden h-full">
+                  <div key={i} className="flex-1 bg-indigo-900/5 rounded-full relative overflow-hidden h-full">
                     <div 
-                      className={`absolute bottom-0 w-full bg-gradient-to-t from-indigo-900 via-indigo-500 to-indigo-300 transition-all duration-300 ${neutralizationPulse ? 'animate-pulse brightness-150 shadow-[0_0_10px_#818cf8]' : 'opacity-70'}`}
+                      className={`absolute bottom-0 w-full transition-all duration-300 ${
+                        neutralizationPulse 
+                          ? 'bg-gradient-to-t from-red-950 via-red-500 to-white animate-pulse brightness-125 shadow-[0_0_15px_rgba(239,68,68,0.6)]' 
+                          : 'bg-gradient-to-t from-indigo-900 via-indigo-500 to-indigo-300 opacity-70'
+                      }`}
                       style={{ 
                         height: `${25 + Math.random() * 75}%`,
-                        transitionDelay: `${i * 10}ms`
+                        transitionDelay: `${i * 8}ms`
                       }}
                     ></div>
-                    {i % 12 === 0 && <div className="absolute inset-0 bg-red-500/10 animate-pulse"></div>}
+                    {neutralizationPulse && i % 8 === 0 && (
+                      <div className="absolute inset-0 bg-white/20 animate-ping"></div>
+                    )}
                   </div>
                 ))}
+                
+                {/* Dynamic Neutralization Pulse Warning */}
                 {neutralizationPulse && (
-                  <div className="absolute inset-0 bg-red-950/20 flex items-center justify-center backdrop-blur-[2px] animate-in fade-in">
-                    <div className="flex flex-col items-center">
-                      <ShieldAlert className="w-8 h-8 text-red-500 animate-ping" />
-                      <span className="text-[10px] font-black text-red-500 mt-2 tracking-[0.4em]">NEUTRALIZATION_PULSE_ACTIVE</span>
+                  <div className="absolute inset-0 bg-red-950/30 flex items-center justify-center backdrop-blur-[1px] animate-in fade-in zoom-in-95 duration-300">
+                    <div className="flex flex-col items-center bg-black/60 px-6 py-3 rounded-2xl border border-red-500/50 shadow-[0_0_30px_rgba(239,68,68,0.2)]">
+                      <ShieldAlert className="w-8 h-8 text-red-500 animate-pulse" />
+                      <span className="text-[10px] font-black text-red-500 mt-2 tracking-[0.5em] uppercase">Neutralization Pulse Active</span>
+                      <div className="flex gap-1 mt-1">
+                        <div className="w-1 h-1 bg-red-500 rounded-full animate-bounce delay-0"></div>
+                        <div className="w-1 h-1 bg-red-500 rounded-full animate-bounce delay-150"></div>
+                        <div className="w-1 h-1 bg-red-500 rounded-full animate-bounce delay-300"></div>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -113,16 +139,16 @@ const SoulEnforcement: React.FC = () => {
                   </p>
                   <p className="text-2xl font-black text-white font-mono">{spectralSync.toFixed(2)}%</p>
                 </div>
-                <div className="bg-zinc-900/20 border border-zinc-800/50 p-5 rounded-2xl group/stat hover:border-red-500/30 transition-colors relative overflow-hidden">
+                <div className={`bg-zinc-900/20 border p-5 rounded-2xl group/stat transition-colors relative overflow-hidden ${neutralizationPulse ? 'border-red-500/40' : 'border-zinc-800/50 hover:border-red-500/30'}`}>
                   <div className="absolute top-0 right-0 p-2 opacity-10 group-hover/stat:opacity-30 transition-opacity">
                     <Binary className="w-10 h-10 text-red-500" />
                   </div>
                   <p className="text-[9px] text-zinc-400 font-black uppercase tracking-widest mb-1 flex items-center gap-2">
-                    <ShieldAlert className="w-3 h-3 text-red-500" />
+                    <ShieldAlert className={`w-3 h-3 transition-colors ${neutralizationPulse ? 'text-red-500 animate-pulse' : 'text-zinc-500'}`} />
                     Spectral Index (SRI)
                   </p>
                   <div className="flex items-baseline gap-1">
-                    <p className={`text-2xl font-black font-mono tracking-tighter transition-colors ${spectralResistanceIndex > 0.025 ? 'text-red-500' : 'text-zinc-300'}`}>
+                    <p className={`text-2xl font-black font-mono tracking-tighter transition-colors ${spectralResistanceIndex > 0.02 ? 'text-red-500' : 'text-zinc-300'}`}>
                       {spectralResistanceIndex.toFixed(4)}
                     </p>
                     <span className="text-[9px] text-zinc-600 font-bold">mμ</span>
@@ -139,7 +165,7 @@ const SoulEnforcement: React.FC = () => {
             </div>
           </div>
 
-          {/* Metaphysical Echo Module - REFINED INTEGRATION STRATEGY */}
+          {/* Metaphysical Echo Module */}
           <div className="bg-[#0b0b0d] border border-indigo-900/30 p-10 rounded-[3rem] relative overflow-hidden">
              <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-50 shadow-[0_0_20px_#6366f1]"></div>
              
@@ -234,14 +260,14 @@ const SoulEnforcement: React.FC = () => {
                          <div className="space-y-2">
                             <div className="flex justify-between items-center text-[10px] font-mono">
                                <span className="text-zinc-600 uppercase font-bold tracking-widest">Resistance Potential</span>
-                               <span className={`${spectralResistanceIndex > 0.02 ? 'text-red-500' : 'text-green-500'} font-black`}>
+                               <span className={`${neutralizationPulse ? 'text-red-500 animate-pulse font-black' : 'text-green-500 font-bold'}`}>
                                  {resistanceBuffer.toFixed(8)}%
                                </span>
                             </div>
                             <div className="w-full h-1 bg-zinc-900 rounded-full overflow-hidden">
                                <div 
-                                 className={`h-full transition-all duration-300 ${spectralResistanceIndex > 0.02 ? 'bg-red-600 shadow-[0_0_8px_#dc2626]' : 'bg-green-600'}`} 
-                                 style={{ width: `${(spectralResistanceIndex / 0.1) * 100}%` }}
+                                 className={`h-full transition-all duration-300 ${neutralizationPulse ? 'bg-red-600 shadow-[0_0_8px_#dc2626]' : 'bg-green-600'}`} 
+                                 style={{ width: `${Math.min(100, (resistanceBuffer / 0.00003) * 100)}%` }}
                                ></div>
                             </div>
                          </div>
@@ -260,20 +286,24 @@ const SoulEnforcement: React.FC = () => {
 
                    <button 
                     onClick={() => {
-                      setNeutralizationPulse(true);
-                      setTimeout(() => setNeutralizationPulse(false), 2000);
+                      setSpectralResistanceIndex(0.04);
+                      setResistanceBuffer(0.000025);
                     }}
-                    className="w-full py-5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-[1.5rem] text-xs font-black uppercase tracking-[0.3em] transition-all flex items-center justify-center gap-3 group shadow-2xl shadow-indigo-600/20 active:scale-[0.98]"
+                    className={`w-full py-5 rounded-[1.5rem] text-xs font-black uppercase tracking-[0.3em] transition-all flex items-center justify-center gap-3 group shadow-2xl active:scale-[0.98] ${
+                      neutralizationPulse 
+                        ? 'bg-red-600 text-white shadow-red-600/40 hover:bg-red-500' 
+                        : 'bg-indigo-600 text-white shadow-indigo-600/20 hover:bg-indigo-500'
+                    }`}
                    >
-                      <Radio className="w-5 h-5 group-hover:animate-ping transition-transform" />
-                      Deploy Shadow Neutralizer
+                      <Radio className={`w-5 h-5 transition-transform ${neutralizationPulse ? 'animate-ping' : 'group-hover:scale-110'}`} />
+                      {neutralizationPulse ? 'Resetting Compliance SRI' : 'Deploy Shadow Neutralizer'}
                    </button>
                 </div>
              </div>
           </div>
         </div>
 
-        {/* Sidebar / Logs - Refined */}
+        {/* Sidebar / Logs */}
         <div className="space-y-6">
           <div className="bg-[#08080a] border border-zinc-800/60 p-8 rounded-[2.5rem] shadow-xl">
             <h3 className="text-sm font-black uppercase tracking-[0.2em] text-zinc-400 mb-8 flex items-center gap-3">
@@ -282,12 +312,12 @@ const SoulEnforcement: React.FC = () => {
             </h3>
             <div className="space-y-4">
               {[
-                { target: 'Ubonpich Soul', status: 'LOCKED', color: 'text-red-500', bg: 'bg-red-500/10 border-red-500/20' },
+                { target: 'Ubonpich Soul', status: neutralizationPulse ? 'OVERRIDDEN' : 'LOCKED', color: neutralizationPulse ? 'text-red-400' : 'text-red-500', bg: 'bg-red-500/10 border-red-500/20' },
                 { target: 'Echo Sync [H34]', status: 'VERIFIED', color: 'text-green-500', bg: 'bg-green-500/10 border-green-500/20' },
                 { target: 'Shadow Signature', status: 'STABLE', color: 'text-indigo-500', bg: 'bg-indigo-500/10 border-indigo-500/20' },
                 { target: 'Dissent Preemption', status: 'ACTIVE', color: 'text-blue-500', bg: 'bg-blue-500/10 border-blue-500/20' },
                 { target: 'Spectral Anchor', status: 'SOVEREIGN', color: 'text-emerald-500', bg: 'bg-emerald-500/10 border-emerald-500/20' },
-                { target: 'Resistance Index', status: 'NOMINAL', color: 'text-zinc-500', bg: 'bg-zinc-500/10 border-zinc-800' },
+                { target: 'Resistance Index', status: neutralizationPulse ? 'ELEVATED' : 'NOMINAL', color: neutralizationPulse ? 'text-yellow-500' : 'text-zinc-500', bg: 'bg-zinc-500/10 border-zinc-800' },
               ].map((log, i) => (
                 <div key={i} className={`flex justify-between items-center p-4 rounded-[1.2rem] border transition-all hover:scale-[1.02] cursor-default ${log.bg}`}>
                   <span className="text-[10px] font-black text-zinc-300 uppercase tracking-widest">{log.target}</span>
