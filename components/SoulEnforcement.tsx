@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Ghost, Sparkles, Moon, Eye, Zap, Flame, Activity, Database, Radio, Fingerprint, Waves, ZapOff, RefreshCcw } from 'lucide-react';
+import { Ghost, Sparkles, Moon, Eye, Zap, Flame, Activity, Database, Radio, Fingerprint, Waves, ZapOff, RefreshCcw, ShieldAlert, Binary } from 'lucide-react';
 
 const SoulEnforcement: React.FC = () => {
   const [spectralSync, setSpectralSync] = useState(94);
@@ -8,6 +8,7 @@ const SoulEnforcement: React.FC = () => {
   const [echoFrequency, setEchoFrequency] = useState(440);
   const [resistanceBuffer, setResistanceBuffer] = useState(0.0001);
   const [syncProgress, setSyncProgress] = useState(99.98);
+  const [spectralResistanceIndex, setSpectralResistanceIndex] = useState(0.024);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -18,6 +19,12 @@ const SoulEnforcement: React.FC = () => {
       setSyncProgress(prev => {
         const next = prev + (Math.random() - 0.5) * 0.02;
         return Math.min(100, Math.max(99.90, next));
+      });
+      // SRI fluctuates slightly based on echo frequency and resistance buffer
+      setSpectralResistanceIndex(prev => {
+        const volatility = (Math.random() - 0.5) * 0.005;
+        const base = Math.max(0.001, prev + volatility);
+        return base;
       });
     }, 1500);
     return () => clearInterval(interval);
@@ -62,7 +69,11 @@ const SoulEnforcement: React.FC = () => {
                 </div>
               </div>
 
-              <div className="mt-12 h-32 flex items-end justify-around gap-1 px-4 bg-zinc-950/50 rounded-2xl border border-zinc-900/50 py-4">
+              <div className="mt-12 h-32 flex items-end justify-around gap-1 px-4 bg-zinc-950/50 rounded-2xl border border-zinc-900/50 py-4 relative">
+                <div className="absolute top-2 left-1/2 -translate-x-1/2 px-3 py-1 bg-red-950/40 border border-red-500/20 rounded-full flex items-center gap-2">
+                   <ShieldAlert className="w-3 h-3 text-red-500 animate-pulse" />
+                   <span className="text-[8px] font-black text-red-400 uppercase tracking-[0.2em]">Spectral Interference Detected</span>
+                </div>
                 {Array.from({ length: 32 }).map((_, i) => (
                   <div key={i} className="flex-1 bg-indigo-900/10 rounded-t-sm relative">
                     <div 
@@ -75,17 +86,23 @@ const SoulEnforcement: React.FC = () => {
               </div>
 
               <div className="mt-8 grid grid-cols-3 gap-4">
-                <div className="p-4 bg-zinc-900/30 border border-zinc-800 rounded-2xl">
+                <div className="p-4 bg-zinc-900/30 border border-zinc-800 rounded-2xl border-l-green-500/50 border-l-4">
                   <p className="text-[9px] text-zinc-500 font-bold uppercase tracking-widest mb-1">Soul Sync</p>
-                  <p className="text-xl font-black text-white">{spectralSync.toFixed(1)}%</p>
+                  <p className="text-xl font-black text-white tracking-tighter">{spectralSync.toFixed(1)}%</p>
                 </div>
-                <div className="p-4 bg-zinc-900/30 border border-zinc-800 rounded-2xl">
-                  <p className="text-[9px] text-zinc-500 font-bold uppercase tracking-widest mb-1">Nascent Dissent</p>
-                  <p className="text-xl font-black text-red-500">{resistanceBuffer.toFixed(6)}%</p>
+                <div className="p-4 bg-[#0c0c0e] border border-zinc-800 rounded-2xl border-l-red-600/50 border-l-4 relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 p-2 opacity-5 group-hover:opacity-10 transition-opacity">
+                    <Binary className="w-8 h-8 text-red-500" />
+                  </div>
+                  <p className="text-[9px] text-zinc-400 font-bold uppercase tracking-widest mb-1">Spectral Resistance (SRI)</p>
+                  <div className="flex items-end gap-2">
+                    <p className="text-xl font-black text-red-500 tracking-tighter">{spectralResistanceIndex.toFixed(4)}</p>
+                    <span className="text-[8px] text-zinc-600 mb-1 font-mono">mμ</span>
+                  </div>
                 </div>
-                <div className="p-4 bg-zinc-900/30 border border-zinc-800 rounded-2xl">
+                <div className="p-4 bg-zinc-900/30 border border-zinc-800 rounded-2xl border-l-indigo-500/50 border-l-4">
                   <p className="text-[9px] text-zinc-500 font-bold uppercase tracking-widest mb-1">Mod Capacity</p>
-                  <p className="text-xl font-black text-indigo-500">MAX</p>
+                  <p className="text-xl font-black text-indigo-500 tracking-tighter">MAX</p>
                 </div>
               </div>
             </div>
@@ -143,6 +160,7 @@ const SoulEnforcement: React.FC = () => {
                       <p>
                         **Protocol V-9 Synchronization:**
                         - **Shadow Signature Extraction:** Deep-scan of the target's intent-horizon to identify nascent resistance before it reaches the physical cortex.
+                        - **Spectral Resistance Index (SRI):** A quantified measure of metaphysical friction. Currently tracking at **{spectralResistanceIndex.toFixed(4)} mμ**. High SRI triggers automatic soul-squeeze protocols.
                         - **IBM Node Cross-Reference:** Every spectral ripple is validated against the **Immutable Survey Logs** on IBM Storage clusters. Non-compliant echoes are phase-canceled instantly.
                         - **Neutralization Cycle:** Once dissent is detected at the 'Soul-Link' level, the system triggers a **Karma-Loop Correction**, redirecting the target's essence toward 100% compliance.
                       </p>
@@ -165,11 +183,14 @@ const SoulEnforcement: React.FC = () => {
                          </div>
                          
                          <div className="flex justify-between items-center text-[10px] font-mono">
-                            <span className="text-zinc-600 uppercase">Shadow Divergence</span>
-                            <span className="text-green-500">NULL_D</span>
+                            <span className="text-zinc-600 uppercase">SRI Threshold</span>
+                            <span className="text-red-500">{spectralResistanceIndex.toFixed(4)} / 1.000</span>
                          </div>
-                         <div className="w-full h-1 bg-zinc-900 rounded-full">
-                            <div className="h-full bg-green-500 w-0"></div>
+                         <div className="w-full h-1 bg-zinc-900 rounded-full overflow-hidden">
+                            <div 
+                              className="h-full bg-red-600 transition-all duration-300" 
+                              style={{ width: `${(spectralResistanceIndex / 0.1) * 100}%` }}
+                            ></div>
                          </div>
 
                          <div className="flex justify-between items-center text-[10px] font-mono">
@@ -206,6 +227,7 @@ const SoulEnforcement: React.FC = () => {
                 { target: 'Spectral Anchor', status: 'Locked', color: 'text-indigo-500' },
                 { target: 'Shadow Signature', status: 'Stable', color: 'text-zinc-500' },
                 { target: 'Metaphysical Echo', status: 'Sync', color: 'text-green-400' },
+                { target: 'SRI Stabilization', status: 'Active', color: 'text-red-400' },
               ].map((log, i) => (
                 <div key={i} className="flex justify-between items-center bg-zinc-900/30 p-3 rounded-xl border border-zinc-800/50 hover:border-zinc-700 transition-colors">
                   <span className="text-[10px] font-bold text-zinc-500 uppercase">{log.target}</span>
