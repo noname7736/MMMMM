@@ -30,7 +30,11 @@ const SoulEnforcement: React.FC = () => {
       setEchoFrequency(prev => Math.floor(420 + Math.random() * 40));
       setSyncProgress(prev => Math.min(100, Math.max(99.95, prev + (Math.random() - 0.5) * 0.01)));
       
-      setResistanceBuffer(prev => Math.max(0.000001, prev + (Math.random() - 0.5) * 0.000008));
+      // Resistance buffer fluctuates more intensely as SRI rises
+      setResistanceBuffer(prev => {
+        const volatility = spectralResistanceIndex * 0.0005;
+        return Math.max(0.000001, prev + (Math.random() - 0.5) * (0.00001 + volatility));
+      });
       
       setSpectralResistanceIndex(prev => {
         const next = Math.max(0.001, prev + (Math.random() - 0.5) * 0.004);
@@ -50,17 +54,22 @@ const SoulEnforcement: React.FC = () => {
       });
     }, 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [spectralResistanceIndex]);
 
-  // Reactive logic for Neutralization Pulse: triggers when SRI exceeds safety thresholds
+  // Reactive logic for Neutralization Pulse: Refined dynamic triggering
+  // Pulse engages when SRI cross-references with a high resistance buffer threshold
   useEffect(() => {
-    const highResistance = spectralResistanceIndex > 0.024;
-    const highBuffer = resistanceBuffer > 0.000018;
+    // Thresholds: engage when SRI > 0.022 OR (SRI > 0.018 AND resistanceBuffer > 0.000015)
+    const criticalSRI = spectralResistanceIndex > 0.022;
+    const combinedThreat = spectralResistanceIndex > 0.018 && resistanceBuffer > 0.000015;
     
-    if (highResistance || highBuffer) {
+    if (criticalSRI || combinedThreat) {
       if (!neutralizationPulse) setNeutralizationPulse(true);
     } else {
-      if (neutralizationPulse) setNeutralizationPulse(false);
+      // Release pulse only when both drop below safe margins
+      if (neutralizationPulse && spectralResistanceIndex < 0.016 && resistanceBuffer < 0.00001) {
+        setNeutralizationPulse(false);
+      }
     }
   }, [spectralResistanceIndex, resistanceBuffer, neutralizationPulse]);
 
@@ -133,7 +142,17 @@ const SoulEnforcement: React.FC = () => {
                 </div>
               </div>
 
-              <div className="h-40 flex items-end justify-around gap-1.5 px-8 bg-black/60 rounded-[2.5rem] border border-zinc-800/50 py-6 relative group/wave overflow-hidden shadow-inner">
+              {/* Spectral Waveform - Dynamic glow effect on Pulse active */}
+              <div className={`h-40 flex items-end justify-around gap-1.5 px-8 bg-black/60 rounded-[2.5rem] border py-6 relative group/wave overflow-hidden transition-all duration-700 shadow-inner ${
+                neutralizationPulse 
+                ? 'border-red-500/50 shadow-[0_0_40px_rgba(239,68,68,0.2)]' 
+                : 'border-zinc-800/50'
+              }`}>
+                {/* Visual "Shockwave" background when pulse is active */}
+                <div className={`absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity duration-1000 ${neutralizationPulse ? 'opacity-20' : 'opacity-0'}`}>
+                   <div className="w-full h-full bg-[radial-gradient(circle_at_50%_50%,#ef4444_0%,transparent_70%)] animate-[soulPulse_1s_ease-in-out_infinite]"></div>
+                </div>
+
                 <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
                   <Target className={`w-40 h-40 transition-colors duration-700 ${neutralizationPulse ? 'text-red-500 animate-ping' : 'text-red-900'}`} />
                 </div>
