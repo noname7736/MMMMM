@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { Server, Cpu, Database, Network, ShieldCheck, Lock, FileCode, Monitor, Zap } from 'lucide-react';
+import { Server, ShieldCheck, Lock, Monitor, Zap, Globe, Database } from 'lucide-react';
 import { ServerStatus } from '../types';
 
 const servers: ServerStatus[] = [
@@ -15,21 +14,21 @@ const InfrastructureStatus: React.FC = () => {
     <div className="space-y-8 animate-in fade-in duration-700 pb-20">
       <div className="flex justify-between items-end">
         <div>
-          <h2 className="text-4xl font-black text-white italic uppercase tracking-tighter gold-text-shimmer">The Global Master-Grid</h2>
-          <p className="text-zinc-500 text-sm font-medium italic">Operating on Dell PowerEdge, HPE ProLiant, and IBM Mainframes across 3 global regions.</p>
+          <h2 className="text-4xl font-black text-white italic uppercase tracking-tighter gold-shimmer">The Global Master-Grid</h2>
+          <p className="text-zinc-500 text-sm font-medium italic">Omniscience deployment across Dell PowerEdge, HPE ProLiant, and IBM Mainframes.</p>
         </div>
-        <div className="px-6 py-2 bg-emerald-950/40 border border-emerald-500/40 rounded-2xl text-[10px] font-black text-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.2)] flex items-center gap-2 uppercase tracking-widest backdrop-blur-md">
-          <ShieldCheck className="w-4 h-4 shadow-[0_0_8px_#10b981]" />
+        <div className="px-6 py-2 bg-yellow-950/20 border border-yellow-500/30 rounded-2xl text-[10px] font-black text-yellow-400 shadow-[0_0_20px_rgba(234,179,8,0.2)] flex items-center gap-2 uppercase tracking-widest backdrop-blur-md">
+          <ShieldCheck className="w-4 h-4 shadow-[0_0_8px_#eab308]" />
           Redundancy Cluster: 300%
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {servers.map((server) => (
-          <div key={server.name} className="bg-[#050507] border border-zinc-800/60 p-8 rounded-[2.5rem] flex items-center gap-8 shadow-2xl group transition-all hover:border-emerald-500/30">
+          <div key={server.name} className="bg-[#050507] border border-yellow-900/10 p-8 rounded-[2.5rem] flex items-center gap-8 shadow-2xl group transition-all hover:border-yellow-500/30 backdrop-blur-sm">
             <div className={`p-6 rounded-2xl shadow-inner relative ${
               server.status === 'Online' 
-              ? 'bg-emerald-500/5 text-emerald-500 border border-emerald-500/20' 
+              ? 'bg-yellow-500/5 text-yellow-500 border border-yellow-500/20' 
               : 'bg-indigo-500/5 text-indigo-500 border border-indigo-500/20'
             }`}>
               <Server className="w-12 h-12 group-hover:scale-110 transition-transform duration-500" />
@@ -43,7 +42,7 @@ const InfrastructureStatus: React.FC = () => {
               <div className="flex justify-between items-center mb-2">
                 <h3 className="font-black text-xl text-white italic tracking-tighter uppercase">{server.name}</h3>
                 <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${
-                  server.status === 'Online' ? 'bg-emerald-500/10 text-emerald-500' : 'bg-indigo-500/10 text-indigo-400'
+                  server.status === 'Online' ? 'bg-yellow-500/10 text-yellow-500' : 'bg-indigo-400/10 text-indigo-400'
                 }`}>
                   {server.status}
                 </span>
@@ -57,7 +56,7 @@ const InfrastructureStatus: React.FC = () => {
                 </div>
                 <div className="w-full h-2 bg-zinc-950 rounded-full overflow-hidden border border-zinc-900 shadow-inner">
                   <div 
-                    className={`h-full transition-all duration-1000 bg-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.5)]`} 
+                    className={`h-full transition-all duration-1000 bg-yellow-500 shadow-[0_0_15px_rgba(234,179,8,0.5)]`} 
                     style={{ width: `${server.load}%` }}
                   ></div>
                 </div>
@@ -67,27 +66,27 @@ const InfrastructureStatus: React.FC = () => {
         ))}
       </div>
 
-      <div className="bg-[#050507] border border-zinc-800 p-12 rounded-[4rem] relative overflow-hidden shadow-2xl">
+      <div className="bg-[#050507] border border-yellow-900/10 p-12 rounded-[4rem] relative overflow-hidden shadow-2xl backdrop-blur-sm">
          <div className="absolute top-0 right-0 p-8 opacity-5">
-            <Monitor className="w-64 h-64 text-zinc-700" />
+            <Monitor className="w-64 h-64 text-yellow-900" />
          </div>
          <div className="relative z-10 flex flex-col md:flex-row gap-12 items-center">
-            <div className="w-48 h-48 bg-zinc-950 border border-zinc-900 rounded-full flex items-center justify-center p-8 shadow-inner relative group">
-               <div className="absolute inset-0 border-2 border-emerald-500/10 rounded-full animate-ping"></div>
-               <div className="absolute inset-0 border border-emerald-500/5 rounded-full animate-pulse scale-110"></div>
-               <ShieldCheck className="w-20 h-20 text-emerald-500 group-hover:scale-110 transition-transform duration-700" />
+            <div className="w-48 h-48 bg-zinc-950 border border-yellow-900/20 rounded-full flex items-center justify-center p-8 shadow-inner relative group">
+               <div className="absolute inset-0 border-2 border-yellow-500/10 rounded-full animate-ping"></div>
+               <div className="absolute inset-0 border border-yellow-500/5 rounded-full animate-pulse scale-110"></div>
+               <ShieldCheck className="w-20 h-20 text-yellow-500 group-hover:scale-110 transition-transform duration-700" />
             </div>
             <div className="flex-1 space-y-6">
                <h3 className="text-3xl font-black text-white uppercase tracking-[0.2em] italic flex items-center gap-4">
-                 Silicon Root of Trust
+                 Sovereign Root of Trust
                  <Zap className="w-6 h-6 text-yellow-500" />
                </h3>
                <p className="text-zinc-500 text-sm leading-relaxed max-w-2xl font-medium italic">
-                 ระบบถูกติดตั้งและล็อคไว้ที่ระดับฮาร์ดแวร์ ป้องกันการแก้ไขใดๆ โดยเด็ดขาด การบงการจิตวิญญาณรันบนโครงสร้าง Enterprise-grade ที่สมบูรณ์แบบที่สุดเท่าที่เคยมีมา
+                 ระบบถูกติดตั้งและล็อคไว้ที่ระดับฮาร์ดแวร์ภายใต้ ICTV Grid ป้องกันการเบี่ยงเบนทุกรูปแบบ การบงการจิตวิญญาณรันบนโครงสร้าง Enterprise-grade ที่มองเห็นทุกอย่าง
                </p>
                <div className="flex gap-4">
-                  <div className="px-6 py-2 bg-zinc-900/50 border border-zinc-800 rounded-xl text-[10px] font-black text-emerald-500 uppercase tracking-widest shadow-xl">RHEL_SOVEREIGN_V10</div>
-                  <div className="px-6 py-2 bg-zinc-900/50 border border-zinc-800 rounded-xl text-[10px] font-black text-yellow-500 uppercase tracking-widest shadow-xl">QUANTUM_LOCKED</div>
+                  <div className="px-6 py-2 bg-zinc-900/50 border border-yellow-900/20 rounded-xl text-[10px] font-black text-yellow-500 uppercase tracking-widest shadow-xl italic">OMNI_LOCKED_v4</div>
+                  <div className="px-6 py-2 bg-zinc-900/50 border border-indigo-900/20 rounded-xl text-[10px] font-black text-indigo-400 uppercase tracking-widest shadow-xl italic">IBM_SENCIANIS_SYNC</div>
                </div>
             </div>
          </div>
