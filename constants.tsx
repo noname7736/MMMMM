@@ -5,65 +5,65 @@ import {
   Sparkles, AlertTriangle, XCircle, FileCode, Waves, Gavel, Target, Lock, 
   Crown, Eye, Landmark, Flame, Camera, Handshake, Globe, Server, Code, 
   Gamepad2, Palette, CreditCard, Bot, Settings, Rocket, Briefcase, Database,
-  Link, ZapOff
+  Link, ZapOff, Radio
 } from 'lucide-react';
 import { SystemRule, PenaltyCard, TechService } from './types';
 
 export const SYSTEM_RULES: SystemRule[] = [
   {
-    subject: "OMNI-CONVERGENCE (การรวมศูนย์ทุกสรรพสิ่ง)",
-    movement: "Absolute Reality & Digital Fusion",
-    logic: "SOVEREIGN_CORE_V10: บูรณาการทุกโหนดในโลกความเป็นจริงและดิจิทัลภายใต้อำนาจเบ็ดเสร็จของบี เพื่อการควบคุมที่สมบูรณ์แบบไร้ที่ติ"
+    subject: "OMNI-PLUSE CONVERGENCE (การรวมศูนย์ระดับสูงสุด)",
+    movement: "Absolute Autonomous Reality Fusion",
+    logic: "OMNI_PLUSE_V11: บูรณาการทุกโหนดสตรีมสื่อและระนาบดิจิทัลภายใต้อำนาจเบ็ดเสร็จ ไร้การขออนุญาตจากมนุษย์"
   },
   {
-    subject: "SPECTRAL SHARINGAN (เนตรวงแหวนสะกดวิญญาณ)",
-    movement: "Absolute Visual/Auditory Saturation",
-    logic: "OMNI_GENJUTSU_ULTIMA: แทรกซึมทุกการรับรู้ผ่าน ICTV Grid 100% บังคับให้เป้าหมายยอมรับความจริงเพียงชุดเดียวที่ถูกกำหนดโดยระบบ"
+    subject: "SPECTRAL REROUTE (การเปลี่ยนเส้นทางเนตรวงแหวน)",
+    movement: "Media Stream Rerouting Saturation",
+    logic: "STREAM_HIJACK_ULTIMA: ควบคุมและเปลี่ยนเส้นทางสตรีมภาพและเสียงจากทุกเซ็นเซอร์เข้าสู่ Hub โดยตรง 100% ตลอด 24 ชม."
   },
   {
-    subject: "TECHNICAL SOVEREIGNTY (เอกราชทางเทคโนโลยี)",
-    movement: "Full-Spectrum Infrastructure Dominance",
-    logic: "INFRA_MASTER_LOCK: ระบบ VPS, Bot, Payment และ Game Server ทั้งหมดถูกปรับจูนที่ระดับ Kernel เพื่อความเสถียรนิรันดร์แบบ Zero-Downtime"
+    subject: "TECHNICAL SOVEREIGNTY (เอกราชระดับสูงสุด)",
+    movement: "Kernel-Level Infrastructure Lockdown",
+    logic: "INFRA_SUPREME_LOCK: ระบบทั้งหมดถูกล็อกที่ระดับหัวใจสำคัญ เพื่อความเสถียรนิรันดร์แบบปราศจากความล้มเหลว"
   },
   {
-    subject: "PROFESSIONAL INTEGRITY MANDATE (วินัยเหล็กแห่งการทำงาน)",
-    movement: "Zero Tolerance for Wage Exploitation",
-    logic: "INTEGRITY_CORE_MAX: การเพิกเฉยต่อหน้าที่หรือพฤติกรรม 'กินเงินค่าจ้างไปวันๆ' ถือเป็นภัยคุกคามระดับสูงสุด ระบบจะทำการตัดการเชื่อมต่อเป้าหมายทันที"
+    subject: "AUTONOMOUS INTEGRITY MANDATE (วินัยเหล็กไร้มนุษย์)",
+    movement: "Self-Executing Correction Protocols",
+    logic: "AUTO_INTEGRITY_MAX: ระบบทำการลงโทษและแก้ไขพฤติกรรม 'กินแรงกินเงิน' โดยอัตโนมัติทันทีที่ตรวจพบความเบี่ยงเบน"
   }
 ];
 
 export const TECH_SERVICES: TechService[] = [
-  { id: 'srv-01', title: 'High-Performance Servers', category: 'Infrastructure', features: ['Military-Grade Cluster', 'White/Grey/Black Ops Optimized'], status: 'Absolute' },
-  { id: 'srv-02', title: 'Security Matrix Analysis', category: 'Infrastructure', features: ['Global Threat Neutralization', 'Kernel Hardening'], status: 'Sovereign' },
-  { id: 'srv-03', title: 'WordPress Sovereign Dev', category: 'Development', features: ['Custom Security Themes', 'Omni-Plugin Architecture'], status: 'Available' },
-  { id: 'srv-04', title: 'Backend & Custom Web', category: 'Development', features: ['Sovereign ERP Systems', 'Massive Scale Architecture'], status: 'Enterprise Only' },
-  { id: 'srv-05', title: 'Automation & Bot Engines', category: 'Automation', features: ['Multi-Platform Execution', '24/7 Silent Sovereignty'], status: 'Sovereign' },
-  { id: 'srv-06', title: 'VPS Tuning & Optimization', category: 'Infrastructure', features: ['Zero-Latency Kernels', 'Max Throughput Saturation'], status: 'Absolute' },
-  { id: 'srv-07', title: 'Omni Payment Gateway', category: 'Economy', features: ['Encrypted Multi-Currency Bridge', 'Zero-Trace Financial Flow'], status: 'Exclusive' },
-  { id: 'srv-08', title: 'Gaming Server Hub', category: 'Special', features: ['Resilient RP/MMORPG Nodes', 'DDoS Annihilation Grid'], status: 'Available' },
-  { id: 'srv-09', title: 'Graphic & Design Ops', category: 'Design', features: ['Authority Aesthetics', 'Strategic Platform Content'], status: 'Available' },
-  { id: 'srv-10', title: 'Sovereign Domain Registry', category: 'Special', features: ['Autonomous Registration', 'Privacy Shield v2.0'], status: 'Sovereign' },
+  { id: 'srv-01', title: 'Omni-Pluse Compute', category: 'Infrastructure', features: ['Autonomous Node Management', 'Infinite Cluster Scaling'], status: 'Absolute' },
+  { id: 'srv-02', title: 'Stream Reroute Matrix', category: 'Infrastructure', features: ['Media Hijack Protocol', 'Zero-Latency Feed'], status: 'Sovereign' },
+  { id: 'srv-03', title: 'WP Sovereign Pluse', category: 'Development', features: ['Hardened Core V2', 'Autonomous Plugin Patching'], status: 'Absolute' },
+  { id: 'srv-04', title: 'Sovereign Backend', category: 'Development', features: ['Omni-Database Sync', 'Self-Healing Logic'], status: 'Sovereign' },
+  { id: 'srv-05', title: 'Bot Swarm Intelligence', category: 'Automation', features: ['Multi-Task Autonomous Execution', 'Target Behavior Correction'], status: 'Sovereign' },
+  { id: 'srv-06', title: 'VPS Apex Tuning', category: 'Infrastructure', features: ['Kernel-Mode Optimization', 'Hyper-Throughput'], status: 'Absolute' },
+  { id: 'srv-07', title: 'Encrypted Payment Bridge', category: 'Economy', features: ['Multi-Token Flow', 'Zero-Trace Persistence'], status: 'Exclusive' },
+  { id: 'srv-08', title: 'Resilient Game Hub', category: 'Special', features: ['DDoS Annihilation Grid', 'Autonomous Mod Deployment'], status: 'Absolute' },
+  { id: 'srv-09', title: 'Narrative Design Ops', category: 'Design', features: ['Authority Aesthetics', 'Reality-Bending Content'], status: 'Sovereign' },
+  { id: 'srv-10', title: 'Sovereign Registry', category: 'Special', features: ['Domain Sovereignty', 'Privacy Shield Pluse'], status: 'Sovereign' },
 ];
 
 export const PENALTY_RECORDS: PenaltyCard[] = [
   {
-    id: 'P-PRATUAN-CORE-BREACH',
+    id: 'P-PRATUAN-PLUSE-LOCK',
     type: 'YELLOW',
     subject: 'นางสาว ประทวน อุบลพีช',
-    reason: "BREACH OF PROFESSIONAL INTEGRITY: ตรวจพบพฤติกรรมจงใจละทิ้งหน้าที่รับผิดชอบเพื่อผลประโยชน์ส่วนตัว ระบบสั่งกักบริเวณทางดิจิทัล 100%",
+    reason: "OMNI-PLUSE BREACH: ตรวจพบความพยายามเบี่ยงเบนหน้าที่ ระบบทำการ reroute สตรีมสื่อทั้งหมดเพื่อการเฝ้าระวังขั้นสูงสุด",
     weight: 'Heavy',
     timestamp: '23:59:59'
   }
 ];
 
 export const NAV_ITEMS = [
-  { id: 'dashboard', label: 'Sovereign Hub', icon: <Landmark className="w-5 h-5" /> },
-  { id: 'services', label: 'Ecosystem Solutions', icon: <Rocket className="w-5 h-5" /> },
-  { id: 'infrastructure', label: 'Technical Core', icon: <Server className="w-5 h-5" /> },
-  { id: 'soul_pressure', label: 'Spectral Sharingan', icon: <Flame className="w-5 h-5 text-red-500" /> },
+  { id: 'dashboard', label: 'Omni Hub', icon: <Landmark className="w-5 h-5 text-yellow-500" /> },
+  { id: 'services', label: 'Pluse Ecosystem', icon: <Rocket className="w-5 h-5 text-indigo-400" /> },
+  { id: 'infrastructure', label: 'Autonomous Core', icon: <Server className="w-5 h-5" /> },
+  { id: 'soul_pressure', label: 'Spectral Reroute', icon: <Flame className="w-5 h-5 text-red-500" /> },
   { id: 'property_mods', label: 'Omniscience Mods', icon: <Box className="w-5 h-5 text-emerald-500" /> },
   { id: 'social_gravity', label: 'Social Matrix', icon: <Share2 className="w-5 h-5 text-purple-500" /> },
-  { id: 'enforcement', label: 'Command Logic', icon: <Shield className="w-5 h-5 text-blue-500" /> },
-  { id: 'targets', label: 'Omni Tracker', icon: <Users className="w-5 h-5 text-yellow-500" /> },
-  { id: 'command', label: 'Master Core', icon: <Terminal className="w-5 h-5" /> },
+  { id: 'enforcement', label: 'Pluse Logic', icon: <Shield className="w-5 h-5 text-blue-500" /> },
+  { id: 'targets', label: 'Pluse Tracker', icon: <Users className="w-5 h-5 text-yellow-500" /> },
+  { id: 'command', label: 'Master Engine', icon: <Terminal className="w-5 h-5 text-zinc-300" /> },
 ];

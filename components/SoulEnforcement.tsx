@@ -1,17 +1,14 @@
 
 import React, { useState, useEffect } from 'react';
-import { Ghost, Waves, ShieldAlert, Cpu, Target, ShieldBan, History, Scan, FileSearch, Terminal, Eye, Sparkles, Landmark, Flame, Volume2, EyeOff, Radio, Camera, Mic, Disc, Zap } from 'lucide-react';
+import { Flame, Eye, Target, Zap, Mic, Radio } from 'lucide-react';
 
 const SoulEnforcement: React.FC = () => {
-  const [hallucinationDepth, setHallucinationDepth] = useState(100.0);
   const [eyeActive, setEyeActive] = useState(true);
-  const [auditoryLoop, setAuditoryLoop] = useState(true);
   const [correlationConfidence, setCorrelationConfidence] = useState(100);
-  const [nascentVectors, setNascentVectors] = useState<string[]>([]);
   const [activeReflections, setActiveReflections] = useState(0);
   
   const [spectralResistance, setSpectralResistance] = useState(4.2);
-  const [resistanceBuffer, setResistanceBuffer] = useState(15.0);
+  const resistanceBuffer = 15.0;
   const [pulseActive, setPulseActive] = useState(false);
 
   const VECTORS = [
@@ -32,10 +29,6 @@ const SoulEnforcement: React.FC = () => {
         const delta = (Math.random() * 4) - 1.8;
         return Math.max(0, Math.min(100, prev + delta));
       });
-      if (Math.random() > 0.8) {
-        const shuffled = [...VECTORS].sort(() => 0.5 - Math.random());
-        setNascentVectors(shuffled.slice(0, 4));
-      }
     }, 1000);
     return () => clearInterval(interval);
   }, []);
@@ -46,7 +39,7 @@ const SoulEnforcement: React.FC = () => {
     } else {
       setPulseActive(false);
     }
-  }, [spectralResistance, resistanceBuffer]);
+  }, [spectralResistance]);
 
   return (
     <div className="space-y-12 pb-32 animate-in fade-in duration-1000 relative">

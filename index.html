@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,13 +63,14 @@
             stroke-dashoffset: 100;
             animation: dash 5s linear infinite;
         }
-        ::-webkit-scrollbar {
-            width: 3px;
+        /* Fixed scrollbar definition */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
         }
-        ::-webkit-scrollbar-track {
+        .custom-scrollbar::-webkit-scrollbar-track {
             background: #020203;
         }
-        ::-webkit-scrollbar-thumb {
+        .custom-scrollbar::-webkit-scrollbar-thumb {
             background: var(--omni-gold);
             border-radius: 10px;
         }
@@ -85,7 +87,13 @@
         .glow-gold {
             filter: drop-shadow(0 0 15px rgba(202, 138, 4, 0.5));
         }
-        /* Perfection layer */
+        .animate-spin-slow {
+            animation: spin 8s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
         .vignette {
             position: fixed;
             inset: 0;

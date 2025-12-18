@@ -1,8 +1,9 @@
 {
-  "name": "SUPER 3MAX PRO DE PRO PLUS | OMNISCIENCE SOVEREIGNTY",
-  "description": "The Final Technical Blueprint. Absolute command, total behavioral saturation, and 100% digital-reality convergence.",
+  "name": "SUPER 3MAX PRO DE PRO PLUS | OMNI-PLUSE SOVEREIGNTY",
+  "description": "The Final Technical Apex. Autonomous gemini-3-pro-preview-pluse integration executing Sovereign Will with absolute media stream rerouting and zero human permission required.",
   "requestFramePermissions": [
     "camera",
-    "microphone"
+    "microphone",
+    "geolocation"
   ]
 }
