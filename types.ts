@@ -29,3 +29,12 @@ export interface PropertyMod {
   status: 'Deployed' | 'Optimizing' | 'Absolute';
   integrity: number;
 }
+
+export interface PenaltyCard {
+  id: string;
+  type: 'YELLOW' | 'RED';
+  subject: string;
+  reason: string;
+  weight: 'Light' | 'Heavy';
+  timestamp: string;
+}

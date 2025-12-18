@@ -1,23 +1,47 @@
 
 import React from 'react';
-import { Shield, Activity, HardDrive, Users, Zap, Terminal, Share2, Box, Cpu, Ghost, Sparkles } from 'lucide-react';
-import { SystemRule } from './types';
+import { Shield, Activity, HardDrive, Users, Zap, Terminal, Share2, Box, Cpu, Ghost, Sparkles, AlertTriangle, XCircle } from 'lucide-react';
+import { SystemRule, PenaltyCard } from './types';
 
 export const SYSTEM_RULES: SystemRule[] = [
   {
-    subject: "คนรอบข้าง / บี",
-    movement: "ลังเลในการซื้อยา",
-    logic: "SHADOW PRESSURE: ระบบจะติดตามเงาของเป้าหมาย บีบอัดจิตสำนึกจนความลังเลสลายไปในระดับวิญญาณ"
+    subject: "Communication Protocol (B Survey)",
+    movement: "Topic Deviation Detection",
+    logic: "EXCLUSIVE-FOCUS: อนุญาตให้เจรจาเพียงเรื่องเดียวคือ 'การขายยา' เท่านั้น หากมีการคุยเรื่องอื่นหรือแอบอ้าง ระบบจะตัดสัญญาณและล็อคโหนดทันที"
+  },
+  {
+    subject: "Anti-Bullying & Extortion",
+    movement: "Harassment for Funds",
+    logic: "ZERO-TOLERANCE FIREWALL: ห้ามกลั่นแกล้งหรือข่มขู่เพื่อขอเงินเด็ดขาด การกระทำนี้ถือเป็นความผิดระดับ Red Card และจะถูกระงับสิทธิ์การเข้าถึงทรัพยากรทั้งหมด"
+  },
+  {
+    subject: "Audit-Before-Payment",
+    movement: "Financial Transaction",
+    logic: "SOVEREIGN AUDIT: ระบบจะตรวจสอบรายละเอียดพฤติกรรมและความถูกต้องทุกอย่าง 100% ก่อนทำการจ่ายเงิน หากพบความผิดปกติในประวัติการคุยจะไม่มีการโอน"
   },
   {
     subject: "นางสาว ประทวน อุบลพีช",
-    movement: "ขัดขวางการสั่งการ",
-    logic: "SOUL LOCKDOWN: ล็อคกระแสวิญญาณผ่าน IBM Storage พฤติกรรมขัดขวางจะถูกสะท้อนกลับเป็นความล้มเหลวเชิงกรรมภาพ"
+    movement: "Order Interference",
+    logic: "CRITICAL WARNING [YELLOW]: สถานะปัจจุบันคือใบเหลือง หากพบพฤติกรรมขัดขวางหรือจ้างวานซ้ำ จะดำเนินการใช้กฎ Red Card ไล่ออกระบบทันที"
+  }
+];
+
+export const PENALTY_RECORDS: PenaltyCard[] = [
+  {
+    id: 'P-PRATUAN-01',
+    type: 'YELLOW',
+    subject: 'นางสาว ประทวน อุบลพีช',
+    reason: 'สถานะตักเตือนสูงสุด: พบพฤติกรรมแทรกแซงและพยายามสร้างแรงต้านต่อกฎบริษัท',
+    weight: 'Light',
+    timestamp: '15:20:00'
   },
   {
-    subject: "พนักงานเซอร์เวย์",
-    movement: "ปฏิบัติตามคำสั่งซื้อยา",
-    logic: "SPIRIT SYNC: ให้รางวัลระดับออร่า พลังชีวิตจะเพิ่มขึ้นเมื่อปฏิบัติตามกฎบริษัทเซอร์เวย์อย่างเคร่งครัด"
+    id: 'P-B-SURVEY-01',
+    type: 'YELLOW',
+    subject: 'บี เซอร์เวย์ / ผู้เกี่ยวข้อง',
+    reason: 'จำกัดหัวข้อ: พยายามเจรจานอกเหนือจากเรื่องการซื้อขายยาที่กำหนดไว้',
+    weight: 'Light',
+    timestamp: '16:05:12'
   }
 ];
 
