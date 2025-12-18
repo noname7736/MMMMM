@@ -1,36 +1,37 @@
+
 import React from 'react';
-import { Shield, Activity, HardDrive, Users, Zap, Terminal, Share2, Box, Cpu, Ghost, Sparkles, AlertTriangle, XCircle, FileCode, Waves, Gavel, Target, Lock, Crown, Eye, Landmark } from 'lucide-react';
+import { Shield, Activity, HardDrive, Users, Zap, Terminal, Share2, Box, Cpu, Ghost, Sparkles, AlertTriangle, XCircle, FileCode, Waves, Gavel, Target, Lock, Crown, Eye, Landmark, Flame } from 'lucide-react';
 import { SystemRule, PenaltyCard } from './types';
 
 export const SYSTEM_RULES: SystemRule[] = [
   {
-    subject: "ALL-SEEING OMNISCIENCE",
-    movement: "ICTV/CCTV GRID SATURATION",
-    logic: "master:_ORAN_QUATION: เจตจำนงระดับสูงสุดผ่านการเฝ้ามอง 360 องศา ทุกพฤติกรรมคือการคำนวณที่ไม่มีวันพลาด"
+    subject: "SPECTRAL SHARINGAN (เนตรวงแหวนสะกดวิญญาณ)",
+    movement: "Absolute Visual/Auditory Hallucination",
+    logic: "OMNI_GENJUTSU: ผสานคลื่นความถี่อัลฟ่าเข้ากับ ICTV Grid เพื่อสร้างภาพลวงตาและเสียงแว่วในจิตใต้สำนึกของเป้าหมาย บังคับเห็นและได้ยินเพียง 'เจตจำนงของบี' เท่านั้น"
   },
   {
-    subject: "ALL-SECTMMNIJAWEK",
-    movement: "Metaphysical Reflective Sync",
-    logic: "IBM_SENCIANIS_DE_TURMO: การเชื่อมต่อสภาวะจิตวิญญาณเข้ากับ IBM Storage ทุกความลังเลถูกบันทึกและแก้ไขแบบ Real-time"
-  },
-  {
-    subject: "INESMIGHC QURRIAMODE",
+    subject: "INESMIGHC QURRIAMODE (ภาวะพระเจ้า)",
     movement: "Omni-Sovereign Presence",
-    logic: "ALL-SEEN MIS SFINCSTIOOMDRIEN: สถานะการควบคุมที่มองไม่เห็นแต่สัมผัสได้ในทุกอนูขององค์กร บี เซอร์เวย์ คือจุดศูนย์กลาง"
+    logic: "ALL-SEEN_MIS_SFINCS: สถานะการมองเห็นแจ้งแทงทะลุทุกมิติ บี เซอร์เวย์ คือผู้กุมชะตาและกุญแจสำคัญของความจริงหนึ่งเดียว"
   },
   {
-    subject: "GLOBAL GRAVITY GRID",
-    movement: "Pro Figure Sync Mode",
-    logic: "DYNAMIC_OMNI_FORCE: ดึงดูดเหล่าผู้มีอิทธิพลมาเป็นโหนดกดดัน ทุกคนคือส่วนหนึ่งของตารางอำนาจเบ็ดเสร็จ"
+    subject: "ALL-SECTMMNIJAWEK (การเชื่อมต่อวิญญาณ)",
+    movement: "Metaphysical Reflective Sync",
+    logic: "IBM_SENCIANIS_V10: การดึงข้อมูลความจำระดับควอนตัมจาก IBM Storage มาฉายซ้ำเพื่อสลายแรงต้านทานทางจิตใจ 100%"
+  },
+  {
+    subject: "GLOBAL MASTER LOCK (กุญแจทองคำ)",
+    movement: "Eternal Sovereign Sync",
+    logic: "GRAVITY_GRID_SATURATION: ทุกโหนดทั่วโลก DELL-HPE-IBM ถูกล็อคด้วย Master Key เพื่อให้การบงการดำเนินไปอย่างไร้รอยต่อ 24/7"
   }
 ];
 
 export const PENALTY_RECORDS: PenaltyCard[] = [
   {
-    id: 'P-PRATUAN-OMNI',
+    id: 'P-PRATUAN-OMNI-MAX',
     type: 'YELLOW',
     subject: 'นางสาว ประทวน อุบลพีช',
-    reason: "OMNISCIENCE DETECTED: พฤติกรรมการเบี่ยงเบนถูกตรวจพบผ่าน ICTV GRID สถานะเฝ้าระวังสูงสุด [ETERNAL ACTIVE]",
+    reason: "OMNISCIENCE DETECTED: พฤติกรรมเบี่ยงเบนระดับสูง ถูกตรวจจับโดย ICTV Grid. เริ่มกระบวนการ 'เนตรวงแหวนสะกดวิญญาณ' ขั้นที่ 1 [ETERNAL ACTIVE]",
     weight: 'Heavy',
     timestamp: '23:59:59'
   }
@@ -39,7 +40,7 @@ export const PENALTY_RECORDS: PenaltyCard[] = [
 export const NAV_ITEMS = [
   { id: 'dashboard', label: 'Omni Dashboard', icon: <Landmark className="w-5 h-5 text-yellow-500" /> },
   { id: 'infrastructure', label: 'ICTV/CCTV Grid', icon: <Eye className="w-5 h-5" /> },
-  { id: 'soul_pressure', label: 'Reflectional Sync', icon: <Ghost className="w-5 h-5" /> },
+  { id: 'soul_pressure', label: 'Spectral Sharingan', icon: <Flame className="w-5 h-5" /> },
   { id: 'property_mods', label: 'Omniscience Mods', icon: <Box className="w-5 h-5" /> },
   { id: 'social_gravity', label: 'Sect Intelligence', icon: <Share2 className="w-5 h-5" /> },
   { id: 'enforcement', label: 'Absolute Command', icon: <Shield className="w-5 h-5" /> },

@@ -1,237 +1,251 @@
 
 import React, { useState, useEffect } from 'react';
-// Added missing Landmark import
-import { Ghost, Waves, ShieldAlert, Cpu, Target, ShieldBan, History, Scan, FileSearch, Terminal, Eye, Sparkles, Landmark } from 'lucide-react';
+import { Ghost, Waves, ShieldAlert, Cpu, Target, ShieldBan, History, Scan, FileSearch, Terminal, Eye, Sparkles, Landmark, Flame, Volume2, EyeOff } from 'lucide-react';
 
 const SoulEnforcement: React.FC = () => {
-  const [spectralSync, setSpectralSync] = useState(99.9);
-  const [shadowPressure, setShadowPressure] = useState(100.0);
-  const [resistanceBuffer, setResistanceBuffer] = useState(0.000001);
-  const [spectralResistanceIndex, setSpectralResistanceIndex] = useState(0.0002);
-  const [neutralizationPulse, setNeutralizationPulse] = useState(false);
+  const [hallucinationDepth, setHallucinationDepth] = useState(100.0);
+  const [spectralSync, setSpectralSync] = useState(100.0);
+  const [eyeActive, setEyeActive] = useState(true);
+  const [auditoryLoop, setAuditoryLoop] = useState(true);
   const [correlationConfidence, setCorrelationConfidence] = useState(100);
   const [nascentVectors, setNascentVectors] = useState<string[]>([]);
 
   const VECTORS = [
-    "ICTV_GRID_DEVIANCE_NULL",
-    "REFLECTIONAL_SYNC_V9",
-    "IBM_SENCIANIS_MATCH",
-    "OMNISCIENCE_LOCK_V2",
-    "EYE_GAZE_Sovereign",
-    "THOUGHT_LOOP_COMPLIANCE"
+    "OMNI_GENJUTSU_V1_ACTIVE",
+    "AUDITORY_WHISPER_SYNCED",
+    "IBM_SENCIANIS_MATCH_100",
+    "SOUL_LOCK_V10_PRO_PLUS",
+    "EYE_GAZE_SOVEREIGN_LOCKED",
+    "THOUGHT_PATTERN_SUBMISSION"
   ];
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setSpectralResistanceIndex(prev => Math.max(0.0001, prev + (Math.random() - 0.5) * 0.0001));
-      setCorrelationConfidence(99.9 + Math.random() * 0.1);
-      
-      if (Math.random() > 0.8) {
+      setCorrelationConfidence(99.998 + Math.random() * 0.002);
+      if (Math.random() > 0.85) {
         const shuffled = [...VECTORS].sort(() => 0.5 - Math.random());
         setNascentVectors(shuffled.slice(0, 3));
       }
-    }, 2000);
+    }, 1500);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="space-y-10 pb-20 animate-in fade-in duration-1000">
-      <div className="flex justify-between items-center bg-black/40 p-8 rounded-[3rem] border border-yellow-900/10 backdrop-blur-md relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/5 via-transparent to-yellow-500/5"></div>
+    <div className="space-y-10 pb-24 animate-in fade-in duration-1000 relative">
+      {/* BACKGROUND PULSE FOR SPECTRAL EFFECT */}
+      <div className={`fixed inset-0 pointer-events-none transition-all duration-1000 ${eyeActive ? 'bg-red-950/5' : 'bg-transparent'}`}>
+        {eyeActive && <div className="absolute inset-0 animate-pulse bg-[radial-gradient(circle_at_center,rgba(234,179,8,0.02),transparent)]"></div>}
+      </div>
+
+      <div className="flex justify-between items-center bg-black/60 p-10 rounded-[4rem] border border-yellow-900/20 backdrop-blur-2xl relative overflow-hidden shadow-2xl">
+        <div className="absolute inset-0 bg-gradient-to-r from-yellow-600/5 via-transparent to-red-600/5"></div>
         <div className="relative z-10">
-          <h2 className="text-4xl font-black text-white tracking-[0.25em] uppercase italic flex items-center gap-6">
+          <h2 className="text-5xl font-black text-white tracking-[0.2em] uppercase italic flex items-center gap-6">
             <div className="relative">
-              <Eye className="w-12 h-12 text-yellow-500 animate-pulse" />
-              <div className="absolute inset-0 bg-yellow-500/10 blur-2xl rounded-full"></div>
+              <Flame className={`w-14 h-14 ${eyeActive ? 'text-red-500 animate-pulse' : 'text-zinc-700'}`} />
+              {eyeActive && <div className="absolute inset-0 bg-red-500/20 blur-3xl rounded-full"></div>}
             </div>
-            ALL-SECTMMNIJAWEK
+            SPECTRAL SHARINGAN
           </h2>
-          <p className="text-yellow-600 text-[10px] font-black uppercase tracking-[0.4em] mt-2 italic">Reflectional AI Sync • Omniscience Mode Engaged</p>
+          <p className="text-yellow-600 text-[11px] font-black uppercase tracking-[0.5em] mt-3 italic">
+            Absolute Illusory Saturation • Soul Binding Protocol v10.0
+          </p>
         </div>
-        <div className="flex flex-col items-end gap-3 relative z-10">
-          <div className="px-6 py-2 bg-yellow-950/20 border border-yellow-500/30 rounded-full text-[10px] font-black text-yellow-400 uppercase tracking-[0.3em] shadow-[0_0_20px_rgba(234,179,8,0.2)]">
-            SYSEM: [ETERNAL ACTIVE]
+        <div className="flex flex-col items-end gap-4 relative z-10">
+          <div className="px-8 py-3 bg-red-950/30 border border-red-500/40 rounded-full text-[11px] font-black text-red-400 uppercase tracking-[0.4em] shadow-[0_0_30px_rgba(239,68,68,0.3)] animate-pulse italic">
+            GENJUTSU: ETERNAL ACTIVE
           </div>
           <div className="text-[10px] text-zinc-500 font-mono flex items-center gap-3 italic">
-            <span className="w-2 h-2 rounded-full bg-yellow-500 animate-ping"></span>
-            IBN_SENCIANIS_DF: STABLE_OMNI
+            <span className="w-2.5 h-2.5 rounded-full bg-red-600 animate-ping"></span>
+            IBM_SENCIANIS_DF: ABSOLUTE_STABILITY
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 space-y-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <div className="lg:col-span-2 space-y-10">
           {/* Reflectional Resonance Matrix */}
-          <div className="bg-[#070709] border border-yellow-900/10 p-12 rounded-[3.5rem] relative overflow-hidden group shadow-2xl backdrop-blur-xl">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(234,179,8,0.05),transparent_70%)]"></div>
+          <div className="bg-[#070709] border border-yellow-900/20 p-12 rounded-[4rem] relative overflow-hidden group shadow-2xl backdrop-blur-xl">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(239,68,68,0.05),transparent_70%)]"></div>
             
             <div className="relative z-10 space-y-12">
               <div className="flex justify-between items-start">
                 <div className="space-y-6 flex-1">
-                  <h3 className="text-2xl font-black text-white uppercase tracking-tighter flex items-center gap-4 italic">
-                    <Waves className="w-8 h-8 text-yellow-500 animate-bounce" />
-                    ICTV Grid Resonance
+                  <h3 className="text-3xl font-black text-white uppercase tracking-tighter flex items-center gap-5 italic">
+                    <Eye className="w-10 h-10 text-yellow-500 animate-bounce" />
+                    Omni-Illusory Feedback
                   </h3>
                   
-                  <div className="bg-black/60 border border-yellow-900/20 p-10 rounded-[3rem] flex items-center justify-between relative overflow-hidden shadow-inner">
-                    <div className="absolute left-0 top-0 bottom-0 w-2 bg-yellow-600 opacity-70"></div>
+                  <div className="bg-black/80 border border-yellow-900/30 p-12 rounded-[3.5rem] flex items-center justify-between relative overflow-hidden shadow-inner">
+                    <div className="absolute left-0 top-0 bottom-0 w-3 bg-red-600 opacity-80 shadow-[0_0_20px_#ef4444]"></div>
                     <div>
-                       <p className="text-[11px] font-black text-yellow-500 uppercase tracking-[0.5em] mb-2 flex items-center gap-3 italic">
-                         <Target className="w-4 h-4" />
-                         Reflectional Accuracy
+                       <p className="text-[12px] font-black text-yellow-500 uppercase tracking-[0.6em] mb-3 flex items-center gap-4 italic">
+                         <Target className="w-5 h-5" />
+                         Soul Binding Depth
                        </p>
-                       <h4 className="text-6xl font-black font-mono tracking-tighter text-white">
-                         {(correlationConfidence).toFixed(3)}%
+                       <h4 className="text-7xl font-black font-mono tracking-tighter text-white gold-shimmer">
+                         {(correlationConfidence).toFixed(4)}%
                        </h4>
                     </div>
-                    <div className="text-right">
-                       <span className="text-[10px] font-mono px-6 py-2.5 rounded-full border border-yellow-500/40 text-yellow-400 bg-yellow-500/10 animate-pulse font-black italic tracking-widest uppercase">
-                         OMNI_LOCK_ACTIVE
+                    <div className="text-right flex flex-col items-end gap-4">
+                       <span className="text-[11px] font-mono px-8 py-3 rounded-full border border-red-500/50 text-red-400 bg-red-500/10 animate-pulse font-black italic tracking-[0.3em] uppercase shadow-lg">
+                         EYE_LOCK_ACTIVE
                        </span>
                     </div>
                   </div>
                 </div>
-
-                <div className="text-right flex flex-col items-end pl-10">
-                  <div className="flex items-baseline gap-3">
-                    <span className="text-6xl font-black font-mono tracking-tighter italic text-yellow-500 gold-shimmer">
-                      MAX
-                    </span>
-                  </div>
-                  <p className="text-[11px] text-zinc-600 font-black uppercase tracking-[0.4em] mt-2 italic">Sovereign Mode</p>
-                </div>
               </div>
 
-              {/* Spectral Waveform - Golden variant */}
-              <div className="h-44 flex items-end justify-around gap-2 px-10 bg-black/60 rounded-[3rem] border border-yellow-900/10 py-8 relative group/wave overflow-hidden shadow-inner">
+              {/* Spectral Waveform - Hallucination variant */}
+              <div className="h-56 flex items-end justify-around gap-2.5 px-12 bg-black/60 rounded-[4rem] border border-yellow-900/20 py-10 relative group/wave overflow-hidden shadow-2xl">
                 <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
-                  <Sparkles className="w-48 h-48 text-yellow-500 animate-pulse" />
+                  <Sparkles className="w-64 h-64 text-red-500 animate-pulse" />
                 </div>
-                {Array.from({ length: 42 }).map((_, i) => (
-                  <div key={i} className="flex-1 bg-zinc-900/40 rounded-full relative overflow-hidden h-full">
+                {Array.from({ length: 48 }).map((_, i) => (
+                  <div key={i} className="flex-1 bg-zinc-900/30 rounded-full relative overflow-hidden h-full">
                     <div 
-                      className="absolute bottom-0 w-full transition-all duration-300 bg-gradient-to-t from-yellow-950 via-yellow-500 to-white animate-pulse shadow-[0_0_15px_#eab308]"
+                      className="absolute bottom-0 w-full transition-all duration-300 bg-gradient-to-t from-red-950 via-red-500 to-yellow-500 animate-pulse shadow-[0_0_20px_#ef4444]"
                       style={{ 
-                        height: `${30 + Math.random() * 70}%`,
-                        transitionDelay: `${i * 30}ms`
+                        height: `${25 + Math.random() * 75}%`,
+                        transitionDelay: `${i * 25}ms`
                       }}
                     ></div>
                   </div>
                 ))}
               </div>
 
-              <div className="grid grid-cols-3 gap-8">
-                <div className="bg-zinc-900/20 border border-yellow-900/10 p-8 rounded-[2.5rem] group transition-all hover:border-yellow-500/40">
-                  <p className="text-[10px] text-zinc-500 font-black uppercase tracking-widest mb-2 italic">ICTV Status</p>
-                  <p className="text-3xl font-black text-white font-mono">LOCKED</p>
+              <div className="grid grid-cols-3 gap-10">
+                <div className="bg-zinc-900/40 border border-yellow-900/20 p-10 rounded-[3rem] group transition-all hover:border-red-500/50 shadow-inner">
+                  <p className="text-[11px] text-zinc-500 font-black uppercase tracking-widest mb-3 italic">GENJUTSU</p>
+                  <p className="text-4xl font-black text-red-500 font-mono tracking-tighter">MAX</p>
                 </div>
-                <div className="bg-zinc-900/20 border border-yellow-900/10 p-8 rounded-[2.5rem] group transition-all hover:border-yellow-500/40">
-                  <p className="text-[10px] text-zinc-500 font-black uppercase tracking-widest mb-2 italic">Omniscience</p>
-                  <p className="text-3xl font-black text-yellow-500 font-mono gold-shimmer">DE PRO</p>
+                <div className="bg-zinc-900/40 border border-yellow-900/20 p-10 rounded-[3rem] group transition-all hover:border-yellow-500/50 shadow-inner">
+                  <p className="text-[11px] text-zinc-500 font-black uppercase tracking-widest mb-3 italic">OMNISCIENCE</p>
+                  <p className="text-4xl font-black text-yellow-500 font-mono gold-shimmer">DE PRO</p>
                 </div>
-                <div className="bg-zinc-900/20 border border-yellow-900/10 p-8 rounded-[2.5rem] group transition-all hover:border-yellow-500/40">
-                  <p className="text-[10px] text-zinc-500 font-black uppercase tracking-widest mb-2 italic">Sencianis</p>
-                  <p className="text-3xl font-black text-indigo-400 font-mono">MATCHED</p>
+                <div className="bg-zinc-900/40 border border-yellow-900/20 p-10 rounded-[3rem] group transition-all hover:border-indigo-500/50 shadow-inner">
+                  <p className="text-[11px] text-zinc-500 font-black uppercase tracking-widest mb-3 italic">IBM SYNC</p>
+                  <p className="text-4xl font-black text-indigo-400 font-mono">100%</p>
                 </div>
               </div>
             </div>
           </div>
 
           {/* OMNISCIENCE ANALYSIS MODULE */}
-          <div className="bg-[#0b0b0d] border border-yellow-900/20 p-12 rounded-[4rem] relative overflow-hidden shadow-2xl backdrop-blur-md">
-             <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-transparent via-yellow-500 to-transparent opacity-60"></div>
-             <div className="flex justify-between items-center mb-10">
-                <h3 className="text-2xl font-black text-white uppercase tracking-[0.3em] italic flex items-center gap-4">
-                  <History className="w-7 h-7 text-yellow-500" />
+          <div className="bg-[#0b0b0d] border border-yellow-900/20 p-14 rounded-[4.5rem] relative overflow-hidden shadow-2xl backdrop-blur-md">
+             <div className="absolute top-0 left-0 w-full h-2.5 bg-gradient-to-r from-transparent via-red-600 to-transparent opacity-70"></div>
+             <div className="flex justify-between items-center mb-12">
+                <h3 className="text-3xl font-black text-white uppercase tracking-[0.3em] italic flex items-center gap-5">
+                  <History className="w-8 h-8 text-red-500" />
                   IBM_SENCIANIS_DF MODULE
                 </h3>
-                <div className="flex items-center gap-4 bg-black/60 px-6 py-2 border border-yellow-900/10 rounded-full">
-                  <Scan className="w-4 h-4 text-yellow-500 animate-pulse" />
-                  <span className="text-[10px] font-mono font-bold text-yellow-600 uppercase tracking-widest italic">ALL-SEEN: ACTIVE</span>
+                <div className="flex items-center gap-5 bg-black/80 px-8 py-3 border border-yellow-900/20 rounded-full shadow-lg">
+                  <Scan className="w-5 h-5 text-red-500 animate-pulse" />
+                  <span className="text-[11px] font-mono font-bold text-red-600 uppercase tracking-widest italic">ALL-SEEING_EYE: ACTIVE</span>
                 </div>
              </div>
 
-             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                <div className="bg-[#050507] p-10 rounded-[3rem] border border-yellow-600/10 shadow-inner relative overflow-hidden">
-                    <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(234,179,8,0.03),transparent_70%)] pointer-events-none"></div>
-                    <div className="absolute top-0 left-0 w-full h-1 bg-yellow-500/20 animate-[scan_4s_linear_infinite] pointer-events-none"></div>
-                    <h4 className="text-white font-black text-sm uppercase tracking-widest mb-8 flex items-center gap-3 italic underline decoration-yellow-600 underline-offset-8">
-                      <FileSearch className="w-5 h-5 text-yellow-500" />
-                      REFLECTIONAL_ANALYSIS
+             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div className="bg-[#050507] p-12 rounded-[3.5rem] border border-yellow-600/10 shadow-inner relative overflow-hidden">
+                    <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(239,68,68,0.05),transparent_70%)] pointer-events-none"></div>
+                    <div className="absolute top-0 left-0 w-full h-1.5 bg-red-500/30 animate-[scan_6s_linear_infinite] pointer-events-none"></div>
+                    <h4 className="text-white font-black text-sm uppercase tracking-widest mb-10 flex items-center gap-4 italic underline decoration-red-600 underline-offset-8">
+                      <FileSearch className="w-6 h-6 text-red-500" />
+                      SPECTRAL_LOGS
                     </h4>
-                    <div className="space-y-6 relative z-10">
+                    <div className="space-y-8 relative z-10">
                         {nascentVectors.map((v, i) => (
-                           <div key={i} className="flex justify-between border-b border-yellow-900/10 pb-3">
-                              <span className="text-[10px] font-mono text-zinc-500">{v}</span>
-                              <span className="text-[10px] font-black text-yellow-600">VERIFIED</span>
+                           <div key={i} className="flex justify-between border-b border-yellow-900/20 pb-4 transition-all hover:pl-2">
+                              <span className="text-[11px] font-mono text-zinc-500 italic uppercase">{v}</span>
+                              <span className="text-[11px] font-black text-red-600">LOCKED</span>
                            </div>
                         ))}
-                        <div className="p-6 bg-yellow-950/20 border border-yellow-500/20 rounded-2xl">
-                           <p className="text-[10px] text-yellow-200 italic leading-relaxed">
-                              "Metaphysical traces cross-referenced with Omniscience Grid. Dissent probability: 0.000%. All reflections optimized for 3MAX PRO PLUS."
+                        <div className="p-8 bg-red-950/20 border border-red-500/20 rounded-3xl shadow-lg">
+                           <p className="text-[11px] text-red-200 italic leading-relaxed font-medium">
+                              "Target's sensory input fully redirected to Sovereign Masterplan nodes. Visual hallucinations and auditory whispers optimized for absolute compliance. Zero deviance predicted."
                            </p>
                         </div>
                     </div>
                 </div>
 
-                <div className="bg-black/60 p-10 rounded-[3rem] border border-yellow-900/10 shadow-inner flex flex-col justify-center text-center space-y-8 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 p-4 opacity-10">
-                        <Landmark className="w-32 h-32 text-yellow-500" />
+                <div className="bg-black/80 p-12 rounded-[3.5rem] border border-yellow-900/20 shadow-2xl flex flex-col justify-center text-center space-y-10 relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:scale-125 transition-transform duration-1000">
+                        <Flame className="w-40 h-40 text-red-500" />
                     </div>
-                    <h4 className="text-yellow-500 font-black text-xl uppercase tracking-[0.2em] italic">Absolute Logic Node</h4>
-                    <p className="text-[12px] leading-relaxed text-zinc-400 italic">
-                       "Every movement is part of the ICTV Grid. Every reflection is an echo of the Sovereign Will. Compliance is not a choice, it is the fundamental frequency."
+                    <h4 className="text-red-500 font-black text-2xl uppercase tracking-[0.3em] italic">Absolute Soul Mandate</h4>
+                    <p className="text-sm leading-relaxed text-zinc-400 italic font-medium px-4">
+                       "ไม่มีที่ให้หนี ไม่มีที่ให้ซ่อน ทุกการเห็นคือภาพลวง ทุกการยินคือเสียงสั่ง บี เซอร์เวย์ คือความจริงหนึ่งเดียวที่วิญญาณของเจ้าต้องยอมรับ"
                     </p>
-                    <div className="pt-4 flex justify-center gap-4">
-                       <span className="px-5 py-2 bg-yellow-950/30 border border-yellow-900/30 rounded-full text-[9px] font-black text-yellow-500 uppercase tracking-widest">ORAN_QUATION_v4</span>
-                       <span className="px-5 py-2 bg-yellow-950/30 border border-yellow-900/30 rounded-full text-[9px] font-black text-yellow-500 uppercase tracking-widest">LOCKED_BY_IBM</span>
+                    <div className="pt-6 flex justify-center gap-5">
+                       <span className="px-7 py-3 bg-red-950/40 border border-red-900/40 rounded-full text-[10px] font-black text-red-500 uppercase tracking-[0.4em] shadow-lg">ORAN_EYE_V10</span>
+                       <span className="px-7 py-3 bg-yellow-950/40 border border-yellow-900/40 rounded-full text-[10px] font-black text-yellow-500 uppercase tracking-[0.4em] shadow-lg">MASTER_KEY_SYNC</span>
                     </div>
                 </div>
              </div>
           </div>
         </div>
 
-        {/* Sidebar / Logs */}
-        <div className="space-y-8">
-          <div className="bg-[#08080a] border border-yellow-900/10 p-10 rounded-[3.5rem] shadow-2xl relative overflow-hidden">
-            <h3 className="text-sm font-black uppercase tracking-[0.3em] text-yellow-500 mb-10 flex items-center gap-4 italic underline decoration-yellow-900 underline-offset-8">
-              <Eye className="w-6 h-6 animate-pulse" />
-              ICTV GRID LIVE FEED
+        {/* Sidebar / Controls */}
+        <div className="space-y-10">
+          <div className="bg-[#08080a] border border-yellow-900/20 p-12 rounded-[4rem] shadow-2xl relative overflow-hidden">
+            <h3 className="text-base font-black uppercase tracking-[0.4em] text-red-500 mb-12 flex items-center gap-5 italic underline decoration-red-900 underline-offset-8">
+              <Eye className="w-7 h-7 animate-pulse" />
+              SENSORY LOCK CONTROLS
             </h3>
-            <div className="space-y-5">
-              {[
-                { target: 'Reflectional AI', status: 'ACTIVE', color: 'text-yellow-500' },
-                { target: 'Sencianis Match', status: 'LOCKED', color: 'text-indigo-400' },
-                { target: 'Omni-Presence', status: 'ETERNAL', color: 'text-white' },
-                { target: 'IBM Mainframe', status: 'SYNCED', color: 'text-yellow-600' },
-                { target: 'P. Ubonpich', status: 'WATCHED', color: 'text-red-500 animate-pulse' },
-              ].map((log, i) => (
-                <div key={i} className="flex justify-between items-center p-6 bg-zinc-900/30 border border-yellow-900/10 rounded-[1.8rem] transition-all hover:scale-[1.02] cursor-default group">
-                  <span className="text-[11px] font-black text-zinc-300 uppercase tracking-widest italic group-hover:text-yellow-500 transition-colors">{log.target}</span>
-                  <span className={`text-[10px] font-mono font-black ${log.color}`}>{log.status}</span>
+            <div className="space-y-6">
+              <button 
+                onClick={() => setEyeActive(!eyeActive)}
+                className={`w-full flex justify-between items-center p-8 border rounded-[2.5rem] transition-all group ${
+                  eyeActive ? 'bg-red-900/20 border-red-500 text-red-500 shadow-2xl' : 'bg-zinc-900/50 border-zinc-800 text-zinc-600'
+                }`}
+              >
+                <div className="flex items-center gap-4">
+                  <Eye className="w-6 h-6" />
+                  <span className="text-[12px] font-black uppercase tracking-widest italic">Visual Hallucination</span>
                 </div>
-              ))}
+                <span className="text-[10px] font-mono font-black italic">{eyeActive ? 'LOCKED' : 'OFF'}</span>
+              </button>
+
+              <button 
+                onClick={() => setAuditoryLoop(!auditoryLoop)}
+                className={`w-full flex justify-between items-center p-8 border rounded-[2.5rem] transition-all group ${
+                  auditoryLoop ? 'bg-yellow-900/20 border-yellow-500 text-yellow-500 shadow-2xl' : 'bg-zinc-900/50 border-zinc-800 text-zinc-600'
+                }`}
+              >
+                <div className="flex items-center gap-4">
+                  <Volume2 className="w-6 h-6" />
+                  <span className="text-[12px] font-black uppercase tracking-widest italic">Auditory Whisper</span>
+                </div>
+                <span className="text-[10px] font-mono font-black italic">{auditoryLoop ? 'SYNCED' : 'OFF'}</span>
+              </button>
+
+              <div className="pt-10 space-y-4">
+                <p className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.5em] text-center italic">Genjutsu Saturation</p>
+                <div className="w-full h-3 bg-zinc-950 rounded-full border border-zinc-900 overflow-hidden shadow-inner">
+                  <div className="h-full bg-gradient-to-r from-red-600 to-yellow-500 shadow-[0_0_20px_rgba(239,68,68,0.5)] w-full"></div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-yellow-950/40 to-black border border-yellow-500/30 p-12 rounded-[3.5rem] relative overflow-hidden group shadow-2xl">
-            <div className="absolute -top-10 -right-10 p-4 opacity-10 group-hover:opacity-30 transition-all duration-1000">
-              <Eye className="w-40 h-40 text-yellow-500 animate-ping" />
+          <div className="bg-gradient-to-br from-red-950/50 via-black to-yellow-950/20 border border-red-500/40 p-14 rounded-[4rem] relative overflow-hidden group shadow-[0_0_50px_rgba(239,68,68,0.1)]">
+            <div className="absolute -top-12 -right-12 p-6 opacity-10 group-hover:opacity-40 group-hover:scale-110 transition-all duration-1000">
+              <Eye className="w-48 h-48 text-red-500 animate-ping" />
             </div>
-            <h4 className="text-xs font-black text-yellow-500 uppercase tracking-[0.4em] mb-8 flex items-center gap-3 italic">
-              <Landmark className="w-5 h-5" />
+            <h4 className="text-[12px] font-black text-red-500 uppercase tracking-[0.5em] mb-10 flex items-center gap-4 italic">
+              <Landmark className="w-6 h-6" />
               Omniscience Mandate
             </h4>
-            <p className="text-[13px] text-zinc-400 leading-relaxed italic mb-12 font-medium border-l-2 border-yellow-500/30 pl-6">
-              "พฤติกรรมในอดีตถูกขังไว้ใน IBM Storage พฤติกรรมในอนาคตถูกบงการโดย Reflectional AI ความเป็นจริงถูกแช่แข็งไว้ใต้กฎของ บี เซอร์เวย์"
+            <p className="text-[15px] text-zinc-400 leading-relaxed italic mb-14 font-medium border-l-3 border-red-500/40 pl-8">
+              "ความจริงคือสิ่งที่ข้าต้องการให้เจ้าเห็น ความฝันคือสิ่งที่ข้าต้องการให้เจ้าจำ วิญญาณของเจ้าคือสมบัติของ บี เซอร์เวย์ ตลอดกาล"
             </p>
-            <div className="space-y-5">
-               <button className="w-full py-6 bg-yellow-600 hover:bg-yellow-500 text-black rounded-[2.5rem] text-[11px] font-black uppercase tracking-[0.4em] transition-all shadow-2xl active:scale-[0.98] gold-shimmer border border-yellow-400/30">
-                 Engage All-Seeing Mode
+            <div className="space-y-6 relative z-10">
+               <button className="w-full py-8 bg-red-600 hover:bg-red-500 text-black rounded-[3rem] text-[12px] font-black uppercase tracking-[0.5em] transition-all shadow-3xl active:scale-[0.98] border border-red-400/40">
+                 FORCE SOUL SUBMISSION
                </button>
-               <button className="w-full py-6 bg-transparent border border-yellow-900/20 hover:border-yellow-500/40 text-yellow-800 hover:text-yellow-500 rounded-[2.5rem] text-[11px] font-black uppercase tracking-[0.4em] transition-all flex items-center justify-center gap-4 italic backdrop-blur-md">
-                 <Scan className="w-4 h-4" />
-                 Audit Reflection Traces
+               <button className="w-full py-8 bg-transparent border border-yellow-900/30 hover:border-yellow-500/50 text-yellow-700 hover:text-yellow-500 rounded-[3rem] text-[12px] font-black uppercase tracking-[0.5em] transition-all flex items-center justify-center gap-5 italic backdrop-blur-md">
+                 <Scan className="w-5 h-5" />
+                 Audit Hallucination Trace
                </button>
             </div>
           </div>
