@@ -1,9 +1,15 @@
 
 import React from 'react';
-import { SYSTEM_RULES, PENALTY_RECORDS } from '../constants';
-import { Zap, ShieldOff, HeartPulse, AlertTriangle, XCircle, UserX, ShieldAlert, Gavel, Activity, Wallet, SearchCheck, ShieldBan, Lock, CheckCircle2, Target } from 'lucide-react';
+import { SYSTEM_RULES } from '../constants';
+import { PenaltyCard } from '../types';
+import { Zap, ShieldBan, Lock, AlertTriangle, Target, ShieldAlert, CheckCircle2 } from 'lucide-react';
 
-const EnforcementTable: React.FC = () => {
+interface EnforcementTableProps {
+  penalties: PenaltyCard[];
+  onIssueInfraction: (target: string) => void;
+}
+
+const EnforcementTable: React.FC<EnforcementTableProps> = ({ penalties, onIssueInfraction }) => {
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 pb-24">
       <div className="flex justify-between items-end">
@@ -81,31 +87,44 @@ const EnforcementTable: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="text-3xl font-black text-white italic uppercase tracking-tighter">Suppression Tracker</h3>
-                    <p className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest mt-1">Status: Employer Absolute Override Active</p>
+                    <p className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest mt-1">Status: {penalties.some(p => p.type === 'RED') ? 'TERMINAL EXPULSION ENGAGED' : 'Override Active'}</p>
                   </div>
                 </div>
+                <button 
+                  onClick={() => onIssueInfraction('นางสาว ประทวน อุบลพีช')}
+                  className="px-6 py-2.5 bg-red-600 hover:bg-red-500 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all shadow-xl active:scale-95"
+                >
+                  Simulate Infraction
+                </button>
               </div>
               
-              <div className="bg-gradient-to-r from-red-950/30 to-transparent border-l-8 border-red-600 p-8 rounded-r-[3rem] mb-12 shadow-2xl backdrop-blur-md">
+              <div className={`bg-gradient-to-r border-l-8 p-8 rounded-r-[3rem] mb-12 shadow-2xl backdrop-blur-md transition-all ${
+                penalties.some(p => p.type === 'RED') ? 'from-red-950/50 border-red-600' : 'from-yellow-950/30 border-yellow-500'
+              }`}>
                 <div className="flex gap-6 items-start">
-                  <div className="p-3 bg-red-600 rounded-2xl shrink-0 shadow-lg">
-                    <Target className="w-8 h-8 text-white" />
+                  <div className={`p-3 rounded-2xl shrink-0 shadow-lg ${
+                    penalties.some(p => p.type === 'RED') ? 'bg-red-600' : 'bg-yellow-500 text-black'
+                  }`}>
+                    <Target className="w-8 h-8" />
                   </div>
                   <div>
-                    <p className="text-xl text-red-100 font-black italic tracking-wide mb-3 uppercase">
-                      Employer Protocol: "ห้ามขัดขวางเด็ดขาด"
+                    <p className="text-xl font-black italic tracking-wide mb-3 uppercase">
+                      {penalties.some(p => p.type === 'RED') ? 'CONSEQUENCE: ABSOLUTE SEVERANCE' : 'Employer Protocol: "ห้ามขัดขวางเด็ดขาด"'}
                     </p>
                     <p className="text-sm text-zinc-400 leading-relaxed font-medium">
-                      คำสั่งนายจ้างมีสถานะสูงสุดในระบบ IBM Node หากพบการกระทำที่ขัดขวางการซื้อขายยาหรือพฤติกรรมดื้อรั้น ระบบจะใช้มาตรการ Red Card ทันทีโดยไม่ต้องแจ้งล่วงหน้า
+                      {penalties.some(p => p.type === 'RED') 
+                        ? "The second infraction threshold has been reached. All corporate affiliations, social links, and resource access for N. Ubonpich are permanently TERMINATED."
+                        : "คำสั่งนายจ้างมีสถานะสูงสุด หากพบการขัดขวางหรือพฤติกรรมดื้อรั้นครั้งที่ 2 ระบบจะยกระดับเป็น RED CARD และตัดการเชื่อมต่อทั้งหมดทันที"
+                      }
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="space-y-6">
-                {PENALTY_RECORDS.map((record) => (
+              <div className="space-y-6 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
+                {penalties.map((record) => (
                   <div key={record.id} className={`flex items-center gap-8 p-10 bg-zinc-900/40 border rounded-[3.5rem] transition-all group/card ${
-                    record.subject.includes('ประทวน') ? 'border-red-500/40 bg-red-500/5' : 'border-zinc-800'
+                    record.type === 'RED' ? 'border-red-600/60 bg-red-950/10' : 'border-zinc-800'
                   } hover:scale-[1.02]`}>
                     <div className={`w-20 h-28 rounded-[1.5rem] shadow-2xl flex items-center justify-center font-black text-[12px] ${
                       record.type === 'YELLOW' ? 'bg-gradient-to-br from-yellow-400 to-yellow-600 text-black' : 'bg-gradient-to-br from-red-500 to-red-800 text-white'
@@ -114,12 +133,14 @@ const EnforcementTable: React.FC = () => {
                     </div>
                     <div className="flex-1">
                       <div className="flex justify-between items-center mb-3">
-                        <span className={`font-black text-2xl uppercase tracking-tighter ${record.subject.includes('ประทวน') ? 'text-red-500' : 'text-white'}`}>
+                        <span className={`font-black text-2xl uppercase tracking-tighter ${record.type === 'RED' ? 'text-red-500' : 'text-white'}`}>
                           {record.subject}
                         </span>
                         <span className="text-[10px] font-mono text-zinc-600 italic font-bold tracking-widest uppercase">TIMESTAMP: {record.timestamp}</span>
                       </div>
-                      <p className="text-base text-zinc-400 font-medium leading-relaxed italic border-l-4 border-red-500/30 pl-6">"{record.reason}"</p>
+                      <p className={`text-base font-medium leading-relaxed italic border-l-4 pl-6 ${
+                        record.type === 'RED' ? 'text-red-200 border-red-600' : 'text-zinc-400 border-zinc-700'
+                      }`}>"{record.reason}"</p>
                     </div>
                   </div>
                 ))}
@@ -136,28 +157,44 @@ const EnforcementTable: React.FC = () => {
             </h4>
             
             <div className="space-y-10 flex-1">
-               <div className="p-8 bg-black/80 border border-zinc-800 rounded-[2.5rem] group transition-all hover:border-red-500/50 shadow-inner">
-                  <div className="flex justify-between items-center mb-6">
+               <div className="p-8 bg-black/80 border border-zinc-800 rounded-[2.5rem] group transition-all hover:border-red-500/50 shadow-inner text-center">
+                  <div className="flex justify-center items-center gap-4 mb-6">
                     <span className="text-[11px] font-black text-zinc-500 uppercase tracking-widest">Obstruction Suppression</span>
-                    <ShieldBan className="w-5 h-5 text-red-500 animate-pulse" />
+                    <ShieldBan className={`w-5 h-5 ${penalties.some(p => p.type === 'RED') ? 'text-red-600 animate-ping' : 'text-red-500'}`} />
                   </div>
                   <div className="w-full h-3 bg-zinc-900 rounded-full overflow-hidden border border-zinc-800 shadow-inner">
-                    <div className="h-full bg-red-600 w-full shadow-[0_0_20px_#ef4444]"></div>
+                    <div className={`h-full bg-red-600 transition-all duration-1000 ${penalties.some(p => p.type === 'RED') ? 'w-full shadow-[0_0_20px_#ef4444]' : 'w-[85%]'}`}></div>
                   </div>
-                  <p className="text-[10px] text-zinc-600 mt-6 font-mono font-bold uppercase tracking-[0.2em]">STATUS: OBSTRUCTION_IMPOSSIBLE</p>
+                  <p className="text-[10px] text-zinc-600 mt-6 font-mono font-bold uppercase tracking-[0.2em]">
+                    {penalties.some(p => p.type === 'RED') ? 'STATUS: TERMINAL_SILENCE' : 'STATUS: OBSTRUCTION_IMPOSSIBLE'}
+                  </p>
                </div>
 
-               <div className="p-10 bg-red-950/20 border border-red-500/30 rounded-[3rem] text-center mt-auto relative overflow-hidden group/audit">
+               <div className={`p-10 border rounded-[3rem] text-center mt-auto relative overflow-hidden group/audit transition-all ${
+                 penalties.some(p => p.type === 'RED') ? 'bg-red-600/20 border-red-600' : 'bg-red-950/20 border-red-500/30'
+               }`}>
                   <div className="absolute inset-0 bg-red-500/5 group-hover/audit:scale-150 transition-transform duration-1000"></div>
-                  <Target className="w-14 h-14 text-red-500 mx-auto mb-6 group-hover:scale-110 transition-transform" />
-                  <p className="text-[11px] text-red-300 font-black uppercase tracking-[0.4em] mb-4">Command Sovereignty</p>
-                  <p className="text-lg text-white font-mono font-black italic tracking-tighter leading-tight">"ทุกคำสั่งต้องได้รับการปฏิบัติตาม<br/>โดยไม่มีเงื่อนไข"</p>
+                  <Target className={`w-14 h-14 mx-auto mb-6 group-hover:scale-110 transition-transform ${
+                    penalties.some(p => p.type === 'RED') ? 'text-white' : 'text-red-500'
+                  }`} />
+                  <p className={`text-[11px] font-black uppercase tracking-[0.4em] mb-4 ${
+                    penalties.some(p => p.type === 'RED') ? 'text-red-400' : 'text-red-300'
+                  }`}>Command Sovereignty</p>
+                  <p className="text-lg text-white font-mono font-black italic tracking-tighter leading-tight italic">
+                    {penalties.some(p => p.type === 'RED') 
+                      ? "SEVERANCE COMPLETE.\nNO COMMUNICATION ALLOWED." 
+                      : "\"ทุกคำสั่งต้องได้รับการปฏิบัติตาม\nโดยไม่มีเงื่อนไข\""}
+                  </p>
                </div>
             </div>
           </div>
 
-          <button className="w-full py-9 bg-red-700 hover:bg-red-600 text-white rounded-[3rem] text-sm font-black uppercase tracking-[0.8em] transition-all shadow-[0_30px_60px_rgba(239,68,68,0.4)] hover:-translate-y-3 active:scale-95 border border-red-500/40">
-             Execute Command Override
+          <button className={`w-full py-9 rounded-[3rem] text-sm font-black uppercase tracking-[0.8em] transition-all shadow-2xl hover:-translate-y-3 active:scale-95 border ${
+            penalties.some(p => p.type === 'RED')
+            ? 'bg-zinc-900 border-zinc-800 text-zinc-700 cursor-not-allowed'
+            : 'bg-red-700 hover:bg-red-600 text-white border-red-500/40 shadow-red-600/40'
+          }`}>
+             {penalties.some(p => p.type === 'RED') ? 'Target Neutralized' : 'Execute Command Override'}
           </button>
         </div>
       </div>
