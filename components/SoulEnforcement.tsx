@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Ghost, Moon, Eye, Zap, Flame, Activity, Database, Radio, Fingerprint, Waves, ZapOff, RefreshCcw, ShieldAlert, Binary, Cpu } from 'lucide-react';
+import { Ghost, Moon, Eye, Zap, Flame, Activity, Database, Radio, Fingerprint, Waves, ZapOff, RefreshCcw, ShieldAlert, Binary, Cpu, TrendingUp, AlertCircle, Target, ShieldBan } from 'lucide-react';
 
 const SoulEnforcement: React.FC = () => {
   const [spectralSync, setSpectralSync] = useState(94.2);
@@ -19,19 +19,18 @@ const SoulEnforcement: React.FC = () => {
       setEchoFrequency(prev => Math.floor(420 + Math.random() * 40));
       setSyncProgress(prev => Math.min(100, Math.max(99.95, prev + (Math.random() - 0.5) * 0.01)));
       
-      // Broadened random walk to ensure thresholds are hit more dynamically
       setResistanceBuffer(prev => Math.max(0.000001, prev + (Math.random() - 0.5) * 0.000008));
+      // SRI fluctuates based on simulated "opposition energy"
       setSpectralResistanceIndex(prev => Math.max(0.001, prev + (Math.random() - 0.5) * 0.004));
     }, 1000);
     return () => clearInterval(interval);
   }, []);
 
-  // Reactive logic for Neutralization Pulse: triggers when SRI or Buffer exceeds safety thresholds
+  // Reactive logic for Neutralization Pulse: triggers when SRI exceeds safety thresholds
   useEffect(() => {
     const highResistance = spectralResistanceIndex > 0.024;
     const highBuffer = resistanceBuffer > 0.000018;
     
-    // Only update if the state actually changes to avoid redundant re-renders
     if (highResistance || highBuffer) {
       if (!neutralizationPulse) setNeutralizationPulse(true);
     } else {
@@ -45,315 +44,215 @@ const SoulEnforcement: React.FC = () => {
         <div>
           <h2 className="text-3xl font-black text-white tracking-[0.25em] uppercase italic flex items-center gap-4">
             <div className="relative">
-              <Ghost className="w-10 h-10 text-indigo-500 animate-pulse" />
-              <div className="absolute inset-0 bg-indigo-500/20 blur-xl rounded-full"></div>
+              <Ghost className="w-10 h-10 text-red-500 animate-pulse" />
+              <div className="absolute inset-0 bg-red-500/20 blur-xl rounded-full"></div>
             </div>
             Soul & Shadow Sync
           </h2>
-          <p className="text-zinc-500 text-sm font-mono uppercase tracking-widest mt-1">Metaphysical Compliance Matrix • Shadow-Level Enforcement</p>
+          <p className="text-zinc-500 text-sm font-mono uppercase tracking-widest mt-1">Employer Will Saturation • Shadow-Level Suppression</p>
         </div>
         <div className="flex flex-col items-end gap-2">
-          <div className="px-5 py-1.5 bg-indigo-950/40 border border-indigo-500/30 rounded-full text-[10px] font-black text-indigo-400 uppercase tracking-[0.2em] shadow-[0_0_15px_rgba(99,102,241,0.2)]">
-            Ghost Protocol: SECURE
+          <div className="px-6 py-2 bg-red-950/40 border border-red-500/30 rounded-full text-[10px] font-black text-red-400 uppercase tracking-[0.3em] shadow-[0_0_20px_rgba(239,68,68,0.3)]">
+            WILL_LOCK: ABSOLUTE
           </div>
-          <div className="text-[9px] text-zinc-600 font-mono flex items-center gap-2">
-            <span className={`w-1.5 h-1.5 rounded-full animate-pulse transition-colors ${neutralizationPulse ? 'bg-red-500 shadow-[0_0_8px_#ef4444]' : 'bg-green-500'}`}></span>
-            ROOT_TRUST_HARDWARE_LOCK: {neutralizationPulse ? 'OVERRIDING' : 'ACTIVE'}
+          <div className="text-[9px] text-zinc-600 font-mono flex items-center gap-3">
+            <span className={`w-2 h-2 rounded-full animate-pulse transition-colors ${neutralizationPulse ? 'bg-red-500 shadow-[0_0_12px_#ef4444]' : 'bg-green-500'}`}></span>
+            COMMAND_AUTHORITY: {neutralizationPulse ? 'SUPPRESSING_RESISTANCE' : 'DOMINANT'}
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 space-y-6">
-          {/* Shadow Resonance Matrix */}
-          <div className={`bg-[#070709] border transition-colors duration-500 p-10 rounded-[2.5rem] relative overflow-hidden group shadow-2xl ${neutralizationPulse ? 'border-red-500/30' : 'border-zinc-800/50'}`}>
-            <div className={`absolute inset-0 transition-opacity duration-500 ${neutralizationPulse ? 'bg-[radial-gradient(circle_at_50%_0%,rgba(239,68,68,0.12),transparent_70%)]' : 'bg-[radial-gradient(circle_at_50%_0%,rgba(79,70,229,0.08),transparent_70%)]'}`}></div>
-            <div className={`absolute top-0 right-0 w-64 h-64 blur-[100px] rounded-full transition-colors duration-500 ${neutralizationPulse ? 'bg-red-600/10' : 'bg-indigo-600/5'}`}></div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-2 space-y-8">
+          {/* Shadow Resonance Matrix - Prominent SRI Readout */}
+          <div className={`bg-[#070709] border transition-all duration-700 p-12 rounded-[3.5rem] relative overflow-hidden group shadow-2xl ${neutralizationPulse ? 'border-red-500 shadow-red-500/20' : 'border-zinc-800/50'}`}>
+            <div className={`absolute inset-0 transition-opacity duration-700 ${neutralizationPulse ? 'opacity-100' : 'opacity-0'}`}>
+               <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(239,68,68,0.2),transparent_70%)]"></div>
+            </div>
             
-            <div className="relative z-10 space-y-8">
+            <div className="relative z-10 space-y-10">
               <div className="flex justify-between items-start">
-                <div className="space-y-2">
-                  <h3 className="text-xl font-black text-white uppercase tracking-tighter flex items-center gap-3">
-                    <Waves className={`w-6 h-6 animate-bounce transition-colors duration-300 ${neutralizationPulse ? 'text-red-500' : 'text-indigo-500'}`} />
-                    Shadow Resonance Matrix
+                <div className="space-y-6 flex-1">
+                  <h3 className="text-2xl font-black text-white uppercase tracking-tighter flex items-center gap-4">
+                    <Waves className={`w-8 h-8 transition-colors duration-300 ${neutralizationPulse ? 'text-red-500 animate-bounce' : 'text-red-600'}`} />
+                    Resonance Pressure Matrix
                   </h3>
-                  <p className="text-xs text-zinc-500 max-w-sm font-medium leading-relaxed">
-                    Analyzing sub-physical cortex ripples in N. Ubonpich. Any deviation from Survey medication orders triggers immediate shadow neutralization.
-                  </p>
+                  
+                  {/* PROMINENT SRI HEADER */}
+                  <div className="bg-black/60 border border-zinc-800 p-8 rounded-[2.5rem] flex items-center justify-between group/sri relative overflow-hidden shadow-inner">
+                    <div className="absolute left-0 top-0 bottom-0 w-2 bg-red-600 opacity-70 group-hover/sri:w-3 transition-all"></div>
+                    <div>
+                       <p className="text-[11px] font-black text-red-500 uppercase tracking-[0.5em] mb-2 flex items-center gap-3">
+                         <ShieldAlert className={`w-4 h-4 ${spectralResistanceIndex > 0.02 ? 'animate-pulse' : ''}`} />
+                         Resistance Index (SRI)
+                       </p>
+                       <h4 className={`text-5xl font-black font-mono tracking-tighter transition-colors ${spectralResistanceIndex > 0.022 ? 'text-red-500' : 'text-white'}`}>
+                         {spectralResistanceIndex.toFixed(4)} <span className="text-xs text-zinc-600 font-bold uppercase tracking-widest">OPS_UNITS</span>
+                       </h4>
+                    </div>
+                    <div className="text-right">
+                       <span className={`text-[11px] font-mono px-5 py-2 rounded-full border shadow-2xl ${spectralResistanceIndex > 0.022 ? 'border-red-500 text-red-500 bg-red-500/10 animate-pulse' : 'border-zinc-800 text-zinc-500'}`}>
+                         {spectralResistanceIndex > 0.024 ? 'TERMINATING_DISSENT' : 'MONITORING_CORTEX'}
+                       </span>
+                    </div>
+                  </div>
                 </div>
-                <div className="text-right flex flex-col items-end">
-                  <div className="flex items-baseline gap-2">
-                    <span className={`text-5xl font-black font-mono tracking-tighter italic transition-colors duration-300 ${neutralizationPulse ? 'text-red-500' : 'text-indigo-500'}`}>
+
+                <div className="text-right flex flex-col items-end pl-10">
+                  <div className="flex items-baseline gap-3">
+                    <span className={`text-5xl font-black font-mono tracking-tighter italic transition-colors duration-500 ${neutralizationPulse ? 'text-red-500' : 'text-red-600'}`}>
                       {shadowPressure.toFixed(3)}%
                     </span>
                   </div>
-                  <p className="text-[10px] text-zinc-600 font-black uppercase tracking-[0.3em] mt-1">Sovereign Pressure</p>
+                  <p className="text-[11px] text-zinc-600 font-black uppercase tracking-[0.4em] mt-2">Saturation Depth</p>
                 </div>
               </div>
 
-              {/* Enhanced Visual Spectral Waveform */}
-              <div className="h-40 flex items-end justify-around gap-1 px-6 bg-black/40 rounded-3xl border border-zinc-800/30 py-6 relative group/wave overflow-hidden">
-                <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${neutralizationPulse ? 'opacity-20' : 'opacity-10'}`}>
-                  <Fingerprint className={`w-24 h-24 transition-colors duration-300 ${neutralizationPulse ? 'text-red-500' : 'text-indigo-500'}`} />
+              {/* Spectral Waveform - Intense Red when resistance rises */}
+              <div className="h-40 flex items-end justify-around gap-1.5 px-8 bg-black/60 rounded-[2.5rem] border border-zinc-800/50 py-6 relative group/wave overflow-hidden shadow-inner">
+                <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
+                  <Target className={`w-40 h-40 transition-colors duration-700 ${neutralizationPulse ? 'text-red-500 animate-ping' : 'text-red-900'}`} />
                 </div>
                 {Array.from({ length: 48 }).map((_, i) => (
-                  <div key={i} className="flex-1 bg-indigo-900/5 rounded-full relative overflow-hidden h-full">
+                  <div key={i} className="flex-1 bg-zinc-900/40 rounded-full relative overflow-hidden h-full">
                     <div 
                       className={`absolute bottom-0 w-full transition-all duration-300 ${
                         neutralizationPulse 
-                          ? 'bg-gradient-to-t from-red-950 via-red-500 to-white animate-pulse brightness-125 shadow-[0_0_15px_rgba(239,68,68,0.6)]' 
-                          : 'bg-gradient-to-t from-indigo-900 via-indigo-500 to-indigo-300 opacity-70'
+                          ? 'bg-gradient-to-t from-red-950 via-red-500 to-white animate-pulse shadow-[0_0_15px_#ef4444]' 
+                          : 'bg-gradient-to-t from-red-950 via-red-700 to-indigo-900 opacity-60'
                       }`}
                       style={{ 
-                        height: `${25 + Math.random() * 75}%`,
-                        transitionDelay: `${i * 8}ms`
+                        height: `${15 + Math.random() * 85}%`,
+                        transitionDelay: `${i * (5 / (spectralResistanceIndex * 1000)) }ms`
                       }}
                     ></div>
-                    {neutralizationPulse && i % 8 === 0 && (
-                      <div className="absolute inset-0 bg-white/20 animate-ping"></div>
-                    )}
                   </div>
                 ))}
-                
-                {/* Dynamic Neutralization Pulse Warning */}
-                {neutralizationPulse && (
-                  <div className="absolute inset-0 bg-red-950/30 flex items-center justify-center backdrop-blur-[1px] animate-in fade-in zoom-in-95 duration-300">
-                    <div className="flex flex-col items-center bg-black/60 px-6 py-3 rounded-2xl border border-red-500/50 shadow-[0_0_30px_rgba(239,68,68,0.2)]">
-                      <ShieldAlert className="w-8 h-8 text-red-500 animate-pulse" />
-                      <span className="text-[10px] font-black text-red-500 mt-2 tracking-[0.5em] uppercase">Neutralization Pulse Active</span>
-                      <div className="flex gap-1 mt-1">
-                        <div className="w-1 h-1 bg-red-500 rounded-full animate-bounce delay-0"></div>
-                        <div className="w-1 h-1 bg-red-500 rounded-full animate-bounce delay-150"></div>
-                        <div className="w-1 h-1 bg-red-500 rounded-full animate-bounce delay-300"></div>
-                      </div>
-                    </div>
-                  </div>
-                )}
               </div>
 
-              <div className="grid grid-cols-3 gap-6">
-                <div className="bg-zinc-900/20 border border-zinc-800/50 p-5 rounded-2xl group/stat hover:border-indigo-500/30 transition-colors">
-                  <p className="text-[9px] text-zinc-500 font-black uppercase tracking-widest mb-1 flex items-center gap-2">
-                    <Activity className="w-3 h-3 text-green-500" />
-                    Soul Sync
+              <div className="grid grid-cols-3 gap-8">
+                <div className="bg-zinc-900/20 border border-zinc-800 p-6 rounded-3xl group transition-all hover:border-red-500/30">
+                  <p className="text-[10px] text-zinc-500 font-black uppercase tracking-widest mb-2 flex items-center gap-2">
+                    <Activity className="w-4 h-4 text-red-500" />
+                    Employer Sync
                   </p>
-                  <p className="text-2xl font-black text-white font-mono">{spectralSync.toFixed(2)}%</p>
+                  <p className="text-3xl font-black text-white font-mono">100.00%</p>
                 </div>
-                <div className={`bg-zinc-900/20 border p-5 rounded-2xl group/stat transition-colors relative overflow-hidden ${neutralizationPulse ? 'border-red-500/40' : 'border-zinc-800/50 hover:border-red-500/30'}`}>
-                  <div className="absolute top-0 right-0 p-2 opacity-10 group-hover/stat:opacity-30 transition-opacity">
-                    <Binary className="w-10 h-10 text-red-500" />
-                  </div>
-                  <p className="text-[9px] text-zinc-400 font-black uppercase tracking-widest mb-1 flex items-center gap-2">
-                    <ShieldAlert className={`w-3 h-3 transition-colors ${neutralizationPulse ? 'text-red-500 animate-pulse' : 'text-zinc-500'}`} />
-                    Spectral Index (SRI)
+                <div className="bg-zinc-900/20 border border-zinc-800 p-6 rounded-3xl group transition-all hover:border-red-500/30">
+                  <p className="text-[10px] text-zinc-500 font-black uppercase tracking-widest mb-2 flex items-center gap-2">
+                    <ShieldBan className="w-4 h-4 text-red-500" />
+                    Obstruct Delta
                   </p>
-                  <div className="flex items-baseline gap-1">
-                    <p className={`text-2xl font-black font-mono tracking-tighter transition-colors ${spectralResistanceIndex > 0.02 ? 'text-red-500' : 'text-zinc-300'}`}>
-                      {spectralResistanceIndex.toFixed(4)}
-                    </p>
-                    <span className="text-[9px] text-zinc-600 font-bold">mμ</span>
-                  </div>
+                  <p className="text-3xl font-black text-white font-mono">0.000</p>
                 </div>
-                <div className="bg-zinc-900/20 border border-zinc-800/50 p-5 rounded-2xl group/stat hover:border-indigo-500/30 transition-colors">
-                  <p className="text-[9px] text-zinc-500 font-black uppercase tracking-widest mb-1 flex items-center gap-2">
-                    <Cpu className="w-3 h-3 text-indigo-500" />
-                    IBM Node Parity
+                <div className="bg-zinc-900/20 border border-zinc-800 p-6 rounded-3xl group transition-all hover:border-red-500/30">
+                  <p className="text-[10px] text-zinc-500 font-black uppercase tracking-widest mb-2 flex items-center gap-2">
+                    <Cpu className="w-4 h-4 text-red-500" />
+                    HPE Core Load
                   </p>
-                  <p className="text-2xl font-black text-indigo-400 font-mono">STABLE</p>
+                  <p className="text-3xl font-black text-red-500 font-mono">DOMINANT</p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Metaphysical Echo Module */}
-          <div className="bg-[#0b0b0d] border border-indigo-900/30 p-10 rounded-[3rem] relative overflow-hidden">
-             <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-transparent via-indigo-500 to-transparent opacity-50 shadow-[0_0_20px_#6366f1]"></div>
+          {/* Analysis Module */}
+          <div className="bg-[#0b0b0d] border border-red-900/30 p-12 rounded-[4rem] relative overflow-hidden shadow-2xl">
+             <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-transparent via-red-600 to-transparent opacity-60 shadow-[0_0_30px_#ef4444]"></div>
+             <h3 className="text-2xl font-black text-white uppercase tracking-[0.3em] italic mb-10">Metaphysical Command Echo</h3>
              
-             <div className="flex justify-between items-start mb-10">
-                <div className="flex items-center gap-5">
-                   <div className="p-5 bg-indigo-950/40 rounded-[1.5rem] border border-indigo-500/30 shadow-inner group">
-                      <Fingerprint className="w-10 h-10 text-indigo-400 group-hover:scale-110 transition-transform" />
+             <div className="bg-black/40 border border-zinc-800 p-8 rounded-[2.5rem] mb-10 flex items-center justify-between">
+                <div className="flex items-center gap-6">
+                   <div className="p-5 bg-red-950/40 rounded-3xl border border-red-500/30">
+                      <Target className="w-10 h-10 text-red-500" />
                    </div>
                    <div>
-                      <h3 className="text-2xl font-black text-white uppercase tracking-[0.2em] italic">Metaphysical Echo</h3>
-                      <div className="flex flex-col gap-2 mt-2">
-                        <div className="flex items-center gap-3">
-                          <div className={`w-3 h-3 rounded-full animate-pulse shadow-lg ${syncProgress > 99.98 ? 'bg-green-500 shadow-green-500/40' : 'bg-yellow-500 shadow-yellow-500/40'}`}></div>
-                          <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest">IBM STORAGE SYNC [NODE_H34]</span>
-                        </div>
-                        <div className="flex items-center gap-4 w-72">
-                          <div className="flex-1 h-1.5 bg-zinc-900 rounded-full overflow-hidden border border-zinc-800/50 shadow-inner">
-                            <div 
-                              className="h-full bg-gradient-to-r from-green-600 via-green-400 to-emerald-500 transition-all duration-500 shadow-[0_0_10px_#10b981]"
-                              style={{ width: `${syncProgress}%` }}
-                            ></div>
-                          </div>
-                          <span className="text-[10px] font-mono text-green-500 font-bold">{syncProgress.toFixed(4)}%</span>
-                        </div>
-                      </div>
+                      <p className="text-[11px] font-black text-red-500 uppercase tracking-widest">Command Propagation Depth</p>
+                      <h4 className="text-3xl font-black text-white italic">ABSOLUTE_SATURATION</h4>
                    </div>
                 </div>
-                <div className="flex flex-col items-end gap-3">
-                   <div className="px-4 py-2 bg-zinc-900/80 rounded-2xl border border-zinc-800 shadow-2xl backdrop-blur-md">
-                      <p className="text-[10px] font-mono text-indigo-500 uppercase font-black tracking-tighter">FREQ_DELTA: {echoFrequency}HZ_ECHO</p>
-                   </div>
-                   <div className="flex items-center gap-2 px-3 py-1 bg-indigo-950/40 rounded-lg border border-indigo-500/30 animate-pulse">
-                      <RefreshCcw className="w-3.5 h-3.5 text-indigo-400 animate-spin-slow" />
-                      <span className="text-[9px] font-black text-indigo-300 uppercase tracking-widest">SOUL_LINK_PULSE</span>
-                   </div>
+                <div className="text-right">
+                   <p className="text-[10px] font-mono text-zinc-600 font-black uppercase tracking-tighter">IBM_NODE: H34_ACTIVE</p>
+                   <p className="text-lg font-black text-red-500 animate-pulse mt-1">NO_INTERFERENCE_DETECTED</p>
                 </div>
              </div>
 
-             <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
-                <div className="md:col-span-3 prose prose-invert prose-xs max-w-none bg-black/50 p-8 rounded-[2rem] border border-zinc-800/50 shadow-inner overflow-hidden relative group">
-                   <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                      <Database className="w-20 h-20 text-indigo-500" />
-                   </div>
-                   <h4 className="text-indigo-400 font-black text-base uppercase tracking-widest mb-6 flex items-center gap-3">
-                      <Zap className="w-5 h-5" />
-                      Integration Strategy: Spectral Link
-                   </h4>
-                   <div className="text-[11px] leading-relaxed text-zinc-400 font-mono space-y-4">
-                      <div className="space-y-2">
-                        <h5 className="text-zinc-200 font-bold uppercase text-[10px] border-b border-zinc-800 pb-1">## 1. Shadow Signature Extraction</h5>
-                        <p className="italic text-zinc-500">
-                          Utilizing ultra-wideband resonance probes to map the "Intent-Horizon" of N. Ubonpich. Deep-scanning of sub-physical ripples ensures zero latency in detection.
-                        </p>
-                      </div>
-                      <div className="space-y-2">
-                        <h5 className="text-zinc-200 font-bold uppercase text-[10px] border-b border-zinc-800 pb-1">## 2. IBM Storage [NODE_H34] Synchronization</h5>
-                        <p className="italic text-zinc-500">
-                          Every spectral ripple is cross-referenced with the **Immutable Ledger of Sovereignty** stored on IBM clusters. Unauthorized ripples are phase-canceled within 0.1ms.
-                        </p>
-                      </div>
-                      <div className="space-y-2">
-                        <h5 className="text-zinc-200 font-bold uppercase text-[10px] border-b border-zinc-800 pb-1">## 3. Pre-Emptive Neutralization Protocol</h5>
-                        <p className="italic text-zinc-500">
-                          Nascent resistance is identified at the shadow level before it manifests as physical dissent. Triggering automatic SRI correction loops to maintain 100% medication order compliance.
-                        </p>
-                      </div>
-                      <div className="pt-4 flex items-center gap-3">
-                        <div className="h-[1px] flex-1 bg-zinc-800"></div>
-                        <span className="text-[9px] font-black text-indigo-600 uppercase tracking-[0.5em]">Absolute Compliance Guaranteed</span>
-                        <div className="h-[1px] flex-1 bg-zinc-800"></div>
-                      </div>
-                   </div>
-                </div>
-
-                <div className="md:col-span-2 space-y-6">
-                   <div className="bg-zinc-950/80 border border-zinc-800 p-6 rounded-[1.5rem] shadow-xl">
-                      <p className="text-[10px] font-black text-zinc-500 uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
-                        <Activity className="w-3 h-3 text-indigo-500" />
-                        Live Echo Diagnostics
+             <div className="prose prose-invert prose-xs max-w-none bg-black/60 p-10 rounded-[3rem] border border-zinc-800/50 shadow-inner">
+                <h4 className="text-red-500 font-black text-lg uppercase tracking-widest mb-8 flex items-center gap-4">
+                   <Zap className="w-6 h-6" />
+                   Employer Will: Enforcement Logic
+                </h4>
+                <div className="text-[12px] leading-relaxed text-zinc-400 font-mono space-y-6">
+                   <div className="space-y-3">
+                      <h5 className="text-red-100 font-black uppercase text-[11px] border-b border-red-900/40 pb-2 flex justify-between">
+                        <span>1. WILL OVERWRITE INITIATED</span>
+                        <span className="text-red-500">100% COMPLETE</span>
+                      </h5>
+                      <p className="italic text-zinc-500 pl-4 border-l-2 border-red-900/20">
+                        เจตจำนงของนายจ้างถูกล็อคเข้าสู่ Silicon Root of Trust ทุกการตัดสินใจของเป้าหมาย (N. Ubonpich) จะถูกบีบให้สอดคล้องกับคำสั่งซื้อยาเท่านั้น
                       </p>
-                      <div className="space-y-5">
-                         <div className="space-y-2">
-                            <div className="flex justify-between items-center text-[10px] font-mono">
-                               <span className="text-zinc-600 uppercase font-bold tracking-widest">Shadow Jitter</span>
-                               <span className="text-green-500 font-black">0.0000 mμ</span>
-                            </div>
-                            <div className="w-full h-1 bg-zinc-900 rounded-full overflow-hidden">
-                               <div className="h-full bg-green-500 w-1 animate-pulse"></div>
-                            </div>
-                         </div>
-                         
-                         <div className="space-y-2">
-                            <div className="flex justify-between items-center text-[10px] font-mono">
-                               <span className="text-zinc-600 uppercase font-bold tracking-widest">Resistance Potential</span>
-                               <span className={`${neutralizationPulse ? 'text-red-500 animate-pulse font-black' : 'text-green-500 font-bold'}`}>
-                                 {resistanceBuffer.toFixed(8)}%
-                               </span>
-                            </div>
-                            <div className="w-full h-1 bg-zinc-900 rounded-full overflow-hidden">
-                               <div 
-                                 className={`h-full transition-all duration-300 ${neutralizationPulse ? 'bg-red-600 shadow-[0_0_8px_#dc2626]' : 'bg-green-600'}`} 
-                                 style={{ width: `${Math.min(100, (resistanceBuffer / 0.00003) * 100)}%` }}
-                               ></div>
-                            </div>
-                         </div>
-
-                         <div className="space-y-2">
-                            <div className="flex justify-between items-center text-[10px] font-mono">
-                               <span className="text-zinc-600 uppercase font-bold tracking-widest">Extraction Depth</span>
-                               <span className="text-indigo-500 font-black">SUB_PHYSICAL_IV</span>
-                            </div>
-                            <div className="w-full h-1 bg-zinc-900 rounded-full overflow-hidden">
-                               <div className="h-full bg-indigo-500 w-[85%] shadow-[0_0_8px_#6366f1]"></div>
-                            </div>
-                         </div>
-                      </div>
                    </div>
-
-                   <button 
-                    onClick={() => {
-                      setSpectralResistanceIndex(0.04);
-                      setResistanceBuffer(0.000025);
-                    }}
-                    className={`w-full py-5 rounded-[1.5rem] text-xs font-black uppercase tracking-[0.3em] transition-all flex items-center justify-center gap-3 group shadow-2xl active:scale-[0.98] ${
-                      neutralizationPulse 
-                        ? 'bg-red-600 text-white shadow-red-600/40 hover:bg-red-500' 
-                        : 'bg-indigo-600 text-white shadow-indigo-600/20 hover:bg-indigo-500'
-                    }`}
-                   >
-                      <Radio className={`w-5 h-5 transition-transform ${neutralizationPulse ? 'animate-ping' : 'group-hover:scale-110'}`} />
-                      {neutralizationPulse ? 'Resetting Compliance SRI' : 'Deploy Shadow Neutralizer'}
-                   </button>
+                   <div className="space-y-3">
+                      <h5 className="text-red-100 font-black uppercase text-[11px] border-b border-red-900/40 pb-2 flex justify-between">
+                        <span>2. ZERO-OBSTRUCTION REINFORCEMENT</span>
+                        <span className="text-green-500">VERIFIED</span>
+                      </h5>
+                      <p className="italic text-zinc-500 pl-4 border-l-2 border-red-900/20">
+                        โหมด ZIP (Zero-Interference Protocol) ทำงานตลอดเวลา หากมีการพยายามขัดขวางแม้เพียงเศษเสี้ยวของจิตสำนึก ระบบ Echo จะทำการลบแรงต้านนั้นทันที
+                      </p>
+                   </div>
+                   <div className="pt-8 flex items-center gap-6">
+                      <div className="h-[2px] flex-1 bg-red-900/30"></div>
+                      <span className="text-[11px] font-black text-red-600 uppercase tracking-[0.8em]">Absolute Will Dominance</span>
+                      <div className="h-[2px] flex-1 bg-red-900/30"></div>
+                   </div>
                 </div>
              </div>
           </div>
         </div>
 
         {/* Sidebar / Logs */}
-        <div className="space-y-6">
-          <div className="bg-[#08080a] border border-zinc-800/60 p-8 rounded-[2.5rem] shadow-xl">
-            <h3 className="text-sm font-black uppercase tracking-[0.2em] text-zinc-400 mb-8 flex items-center gap-3">
-              <Moon className="w-5 h-5 text-zinc-600 animate-pulse" />
-              Compliance Feed
+        <div className="space-y-8">
+          <div className="bg-[#08080a] border border-zinc-800 p-10 rounded-[3.5rem] shadow-2xl">
+            <h3 className="text-sm font-black uppercase tracking-[0.3em] text-red-500 mb-10 flex items-center gap-4">
+              <ShieldBan className="w-6 h-6 animate-pulse" />
+              Obstruct-Zero Feed
             </h3>
-            <div className="space-y-4">
+            <div className="space-y-5">
               {[
-                { target: 'Ubonpich Soul', status: neutralizationPulse ? 'OVERRIDDEN' : 'LOCKED', color: neutralizationPulse ? 'text-red-400' : 'text-red-500', bg: 'bg-red-500/10 border-red-500/20' },
-                { target: 'Echo Sync [H34]', status: 'VERIFIED', color: 'text-green-500', bg: 'bg-green-500/10 border-green-500/20' },
-                { target: 'Shadow Signature', status: 'STABLE', color: 'text-indigo-500', bg: 'bg-indigo-500/10 border-indigo-500/20' },
-                { target: 'Dissent Preemption', status: 'ACTIVE', color: 'text-blue-500', bg: 'bg-blue-500/10 border-blue-500/20' },
-                { target: 'Spectral Anchor', status: 'SOVEREIGN', color: 'text-emerald-500', bg: 'bg-emerald-500/10 border-emerald-500/20' },
-                { target: 'Resistance Index', status: neutralizationPulse ? 'ELEVATED' : 'NOMINAL', color: neutralizationPulse ? 'text-yellow-500' : 'text-zinc-500', bg: 'bg-zinc-500/10 border-zinc-800' },
+                { target: 'Command Saturation', status: 'DOMINANT', color: 'text-red-500', bg: 'bg-red-500/10 border-red-500/20 shadow-red-500/5' },
+                { target: 'Interference Filter', status: 'ACTIVE', color: 'text-green-500', bg: 'bg-green-500/10 border-green-500/20' },
+                { target: 'SRI Monitoring', status: spectralResistanceIndex > 0.022 ? 'SUPPRESSING' : 'STABLE', color: spectralResistanceIndex > 0.022 ? 'text-red-500' : 'text-indigo-500', bg: 'bg-indigo-500/10 border-indigo-500/20' },
+                { target: 'Staff 44 Compliance', status: 'LOCKED', color: 'text-indigo-500', bg: 'bg-indigo-500/10 border-indigo-500/20' },
+                { target: 'P. Ubonpich Anchor', status: 'SOVEREIGN', color: 'text-red-600', bg: 'bg-red-500/5 border-red-900/20' },
               ].map((log, i) => (
-                <div key={i} className={`flex justify-between items-center p-4 rounded-[1.2rem] border transition-all hover:scale-[1.02] cursor-default ${log.bg}`}>
-                  <span className="text-[10px] font-black text-zinc-300 uppercase tracking-widest">{log.target}</span>
-                  <span className={`text-[10px] font-mono font-black ${log.color}`}>{log.status}</span>
+                <div key={i} className={`flex justify-between items-center p-5 rounded-[1.5rem] border transition-all hover:scale-[1.05] cursor-default shadow-lg ${log.bg}`}>
+                  <span className="text-[11px] font-black text-zinc-300 uppercase tracking-widest">{log.target}</span>
+                  <span className={`text-[11px] font-mono font-black ${log.color}`}>{log.status}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-indigo-950/40 to-red-950/40 border border-indigo-500/20 p-8 rounded-[2.5rem] relative overflow-hidden group shadow-2xl">
-            <div className="absolute -top-10 -right-10 p-4 opacity-5 group-hover:opacity-20 transition-all group-hover:scale-150 duration-700">
-              <Flame className="w-32 h-32 text-red-500" />
+          <div className="bg-gradient-to-br from-red-950/40 to-black border border-red-500/30 p-10 rounded-[3.5rem] relative overflow-hidden group shadow-2xl">
+            <div className="absolute -top-10 -right-10 p-4 opacity-10 group-hover:opacity-30 transition-all duration-1000">
+              <Zap className="w-40 h-40 text-red-500 animate-pulse" />
             </div>
-            <h4 className="text-xs font-black text-indigo-400 uppercase tracking-[0.3em] mb-5 flex items-center gap-2">
-              <Zap className="w-4 h-4" />
-              Spirit-Bind Command
+            <h4 className="text-xs font-black text-red-500 uppercase tracking-[0.4em] mb-6 flex items-center gap-3">
+              <Target className="w-5 h-5" />
+              Sovereign Will Hammer
             </h4>
-            <p className="text-[11px] text-zinc-400 leading-relaxed italic mb-8 font-medium">
-              Hardware-level soul-linkage via HPE ProLiant Gen11 spiritual accelerators ensures that every metabolic pulse from N. Ubonpich contributes to the 100% fulfillment of Survey medication orders. 
+            <p className="text-[12px] text-zinc-400 leading-relaxed italic mb-10 font-medium">
+              ทุกคำสั่งของนายจ้างจะถูกบันทึกเป็นกฎเหล็กที่ไม่มีใครทำลายได้ การพยายามขัดขวางคือการทำลายตัวเองของเป้าหมายภายใต้กฎ IBM Storage Nodes
             </p>
-            <div className="space-y-3">
-               <button className="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl text-[10px] font-black uppercase tracking-[0.3em] transition-all shadow-[0_0_20px_rgba(79,70,229,0.4)] active:scale-[0.98]">
-                 Engage Soul-Crush Protocol
+            <div className="space-y-4">
+               <button className="w-full py-5 bg-red-600 hover:bg-red-500 text-white rounded-[2rem] text-[11px] font-black uppercase tracking-[0.4em] transition-all shadow-[0_20px_40px_rgba(239,68,68,0.4)] active:scale-[0.95]">
+                 Force Full Will Saturation
                </button>
-               <button className="w-full py-4 bg-transparent border border-zinc-800 hover:border-red-500/40 text-zinc-600 hover:text-red-500 rounded-2xl text-[10px] font-black uppercase tracking-[0.3em] transition-all flex items-center justify-center gap-2 group/mercy">
-                 <ZapOff className="w-4 h-4 group-hover/mercy:scale-125 transition-transform" />
-                 Bypass Mercy Firewall
+               <button className="w-full py-5 bg-transparent border border-zinc-800 hover:border-red-500/40 text-zinc-600 hover:text-red-500 rounded-[2rem] text-[11px] font-black uppercase tracking-[0.4em] transition-all flex items-center justify-center gap-3">
+                 Isolate Obstructive Nodes
                </button>
             </div>
-          </div>
-
-          <div className="bg-black/80 border border-zinc-800/60 p-6 rounded-[2rem] text-center shadow-inner relative overflow-hidden group">
-             <div className="absolute inset-0 bg-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-             <Database className="w-8 h-8 text-indigo-900 mx-auto mb-3" />
-             <p className="text-[10px] text-zinc-600 font-mono uppercase tracking-[0.2em] font-black">IBM Spectral Node Cluster</p>
-             <p className="text-[11px] text-indigo-500 font-black mt-2 tracking-widest">ECHO_VERIFIED_H34_SOVEREIGN</p>
           </div>
         </div>
       </div>

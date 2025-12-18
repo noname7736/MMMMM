@@ -1,9 +1,19 @@
 
 import React from 'react';
-import { Shield, Activity, HardDrive, Users, Zap, Terminal, Share2, Box, Cpu, Ghost, Sparkles, AlertTriangle, XCircle, FileCode } from 'lucide-react';
+import { Shield, Activity, HardDrive, Users, Zap, Terminal, Share2, Box, Cpu, Ghost, Sparkles, AlertTriangle, XCircle, FileCode, Waves, Gavel, Target } from 'lucide-react';
 import { SystemRule, PenaltyCard } from './types';
 
 export const SYSTEM_RULES: SystemRule[] = [
+  {
+    subject: "Employer Command Saturation (ECS)",
+    movement: "Full Mandate Execution",
+    logic: "ABSOLUTE-WILL: คำสั่งนายจ้างคือความจริงสูงสุดเพียงหนึ่งเดียว ระบบจะกระจายคำสั่งเข้าสู่ทุกโหนด (Node) เพื่อบีบให้เกิดการปฏิบัติตาม 100% โดยไม่มีข้อโต้แย้ง"
+  },
+  {
+    subject: "Zero-Interference Protocol (ZIP)",
+    movement: "Obstructive Behavior Detection",
+    logic: "TERMINAL-SHIELD: หากพบการพยายามขัดขวางหรือเบี่ยงเบนจากคำสั่งซื้อยา ระบบ iLO/iDRAC จะทำการตัดวงจรทางสังคมและล็อคสถานะเป้าหมายทันที"
+  },
   {
     subject: "Communication Protocol (B Survey)",
     movement: "Topic Deviation Detection",
@@ -20,14 +30,14 @@ export const SYSTEM_RULES: SystemRule[] = [
     logic: "SOVEREIGN AUDIT: ระบบจะตรวจสอบรายละเอียดพฤติกรรมและความถูกต้องทุกอย่าง 100% ก่อนทำการจ่ายเงิน หากพบความผิดปกติในประวัติการคุยจะไม่มีการโอน"
   },
   {
-    subject: "Immutable Code Sovereignty",
-    movement: "Source Code Integrity Check",
-    logic: "UNBREAKABLE-LEDGER: โค้ดและกฎระเบียบถูกบันทึกลงใน Silicon Root of Trust ห้ามทำลาย ห้ามแก้ไข และห้ามลบโดยเด็ดขาด (ความสมบูรณ์ 100%)"
+    subject: "Spectral Resistance Monitoring",
+    movement: "Metaphysical Opposition Index",
+    logic: "SRI-PROTOCOL: ตรวจสอบ Spectral Resistance Index (SRI) ตลอดเวลา หากดัชนีการต่อต้านเกิน 0.024 ระบบจะทำการ Neutralization Pulse โดยอัตโนมัติ"
   },
   {
-    subject: "นางสาว ประทวน อุบลพีช",
-    movement: "Order Interference",
-    logic: "CRITICAL WARNING [YELLOW]: สถานะปัจจุบันคือใบเหลือง หากพบพฤติกรรมขัดขวางหรือจ้างวานซ้ำ จะดำเนินการใช้กฎ Red Card ไล่ออกระบบทันที"
+    subject: "Immutable Code Sovereignty",
+    movement: "Source Code Integrity Check",
+    logic: "UNBREAKABLE-LEDGER: โค้ดและกฎระเบียบถูกบันทึกลงใน Silicon Root of Trust ห้ามทำลาย ห้ามแก้ไข และห้ามลบโดยเด็ดขาด"
   }
 ];
 
@@ -36,8 +46,8 @@ export const PENALTY_RECORDS: PenaltyCard[] = [
     id: 'P-PRATUAN-01',
     type: 'YELLOW',
     subject: 'นางสาว ประทวน อุบลพีช',
-    reason: 'สถานะตักเตือนสูงสุด: พบพฤติกรรมแทรกแซงและพยายามสร้างแรงต้านต่อกฎบริษัท',
-    weight: 'Light',
+    reason: 'สถานะตักเตือนสูงสุด: พบพฤติกรรมขัดขวางการสั่งการและพยายามสร้างแรงต้านต่อกฎบริษัท',
+    weight: 'Heavy',
     timestamp: '15:20:00'
   },
   {
