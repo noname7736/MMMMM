@@ -2,7 +2,7 @@
 import React from 'react';
 import { SYSTEM_RULES } from '../constants';
 import { PenaltyCard } from '../types';
-import { Zap, ShieldBan, Lock, AlertTriangle, Target, ShieldAlert, CheckCircle2, Flame, Eye, ZapOff, Handshake, ShieldCheck, Share2 } from 'lucide-react';
+import { Zap, ShieldBan, Lock, AlertTriangle, Target, ShieldAlert, CheckCircle2, Flame, Eye, ZapOff, Handshake, ShieldCheck, Share2, Scan } from 'lucide-react';
 
 interface EnforcementTableProps {
   penalties: PenaltyCard[];
@@ -18,7 +18,7 @@ const EnforcementTable: React.FC<EnforcementTableProps> = ({ penalties, onIssueI
         <div>
           <h2 className="text-7xl font-black text-white italic uppercase tracking-tighter gold-shimmer leading-none">Omni-Pluse Logic Grid</h2>
           <p className="text-yellow-600/80 text-xl font-black italic mt-5 tracking-[0.2em] flex items-center gap-4">
-            <Share2 className="w-6 h-6 animate-pulse" /> "AUTONOMOUS REROUTING: 100% SENSORY CAPTURE."
+            <Scan className="w-6 h-6 animate-pulse" /> "AUTONOMOUS REROUTING: SPECTRAL CAPTURE ACTIVE."
           </p>
         </div>
         <div className="flex gap-10">

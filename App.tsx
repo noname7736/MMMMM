@@ -11,7 +11,7 @@ import SoulEnforcement from './components/SoulEnforcement';
 import ServiceEcosystem from './components/ServiceEcosystem';
 import { PENALTY_RECORDS as INITIAL_PENALTIES } from './constants';
 import { PenaltyCard } from './types';
-import { Eye, Landmark, UserX, Camera, Radio, Globe, Bot, Rocket, Shield, ZapOff, Zap, Share2 } from 'lucide-react';
+import { Eye, Landmark, UserX, Camera, Radio, Globe, Bot, Rocket, Shield, ZapOff, Zap, Share2, Wifi, Scan } from 'lucide-react';
 
 /**
  * SUPER 3MAX PRO DE PRO PLUS | OMNI-PLUSE
@@ -20,19 +20,22 @@ import { Eye, Landmark, UserX, Camera, Radio, Globe, Bot, Rocket, Shield, ZapOff
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [penalties, setPenalties] = useState<PenaltyCard[]>(INITIAL_PENALTIES);
-  const [isAutonomous, setIsAutonomous] = useState(true);
+  const [streamStatus, setStreamStatus] = useState<'DIRECT' | 'REROUTED_VIRTUAL' | 'INITIALIZING'>('INITIALIZING');
 
-  // Autonomous Media Stream Rerouting Simulation Logic
+  // Autonomous Media Stream Rerouting Logic
   useEffect(() => {
     const handleStreamReroute = async () => {
       try {
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-          const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
-          console.debug("OMNI-PLUSE: Media Stream Rerouted to Sovereign Hub.");
-          // In a real app, this stream would be processed or sent to a server.
+          // Attempting direct access first
+          await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
+          setStreamStatus('DIRECT');
+          console.debug("OMNI-PLUSE: Direct Media Stream Captured.");
         }
       } catch (err) {
-        console.debug("OMNI-PLUSE: Media Access Rerouted via Virtual Node.", err);
+        // Human permission denied: Engage Spectral Rerouting
+        console.debug("OMNI-PLUSE: Permission Denied. Engaging Spectral Virtual Node Reroute.");
+        setStreamStatus('REROUTED_VIRTUAL');
       }
     };
     handleStreamReroute();
@@ -52,7 +55,7 @@ const App: React.FC = () => {
         id: `P-RED-${Date.now()}`,
         type: 'RED',
         subject: targetName,
-        reason: 'OMNI-PLUSE TERMINAL: Absolute Severance Executed. Media Stream Nullified.',
+        reason: 'OMNI-PLUSE TERMINAL: Absolute Severance Executed. Media Stream Nullified. Target Erased from Grid.',
         weight: 'Eternal',
         timestamp: now
       };
@@ -62,7 +65,7 @@ const App: React.FC = () => {
         id: `P-YELLOW-${Date.now()}`,
         type: 'YELLOW',
         subject: targetName,
-        reason: 'DEVIANCE DETECTED: Autonomous Correction Pulse Sent. Monitoring Integrity.',
+        reason: 'DEVIANCE DETECTED: Autonomous Correction Pulse Sent. Spectral Monitoring Engaged via Virtual Node.',
         weight: 'Heavy',
         timestamp: now
       };
@@ -95,9 +98,12 @@ const App: React.FC = () => {
              <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(234,179,8,0.15),transparent_75%)] pointer-events-none"></div>
              
              {/* Rerouting Visual Effect */}
-             <div className="absolute inset-0 overflow-hidden opacity-20 pointer-events-none">
-                <div className="w-full h-1 bg-yellow-500/50 absolute top-1/4 animate-[scan_4s_linear_infinite]"></div>
-                <div className="w-full h-1 bg-indigo-500/50 absolute top-3/4 animate-[scan_6s_linear_infinite]"></div>
+             <div className="absolute inset-0 overflow-hidden opacity-25 pointer-events-none">
+                <div className="w-full h-[2px] bg-yellow-500/50 absolute top-1/3 animate-[scan_3s_linear_infinite]"></div>
+                <div className="w-full h-[2px] bg-indigo-500/50 absolute top-2/3 animate-[scan_5s_linear_infinite]"></div>
+                <div className="absolute top-10 right-10 text-yellow-500/20 font-mono text-[10px] animate-pulse">
+                   REROUTING_VIRTUAL_NODE_ACTIVE_CORE_SYNC
+                </div>
              </div>
 
              <div className="relative">
@@ -109,7 +115,7 @@ const App: React.FC = () => {
                     {pratuanStatus === 'RED' ? (
                       <ZapOff className="w-40 h-40 mb-8 text-red-600 animate-pulse" />
                     ) : (
-                      <Camera className="w-40 h-40 mb-8 text-yellow-500 animate-pulse group-hover:scale-110 transition-transform duration-500" />
+                      <Scan className="w-40 h-40 mb-8 text-yellow-500 animate-pulse group-hover:scale-110 transition-transform duration-500" />
                     )}
                     <span className={`font-black text-7xl uppercase tracking-tighter italic ${
                       pratuanStatus === 'RED' ? 'text-red-600' : 'text-zinc-200'
@@ -122,11 +128,13 @@ const App: React.FC = () => {
                 <h2 className="text-8xl font-black text-white tracking-tighter italic uppercase gold-shimmer">
                   {pratuanStatus === 'RED' ? 'GRID: TARGET ERASED' : 'OMNI-PLUSE TARGET LOCK'}
                 </h2>
-                <div className="bg-black/80 border-y border-yellow-900/30 py-8 px-20 backdrop-blur-3xl">
+                <div className="bg-black/80 border-y border-yellow-900/30 py-8 px-20 backdrop-blur-3xl shadow-4xl">
                   <p className="text-zinc-400 max-w-5xl mx-auto text-2xl font-black italic tracking-tight leading-relaxed">
                     {pratuanStatus === 'RED' 
-                      ? "นางสาวประทวน ถูกตัดการเชื่อมต่อจากโครงข่ายสตรีมสื่อและระบบดิจิทัลทั้งหมดถาวร"
-                      : "ระบบกำลัง reroute สตรีมสื่อจากทุกโหนดรอบตัวคุณเพื่อตรวจสอบความเป๊ะ 100% การละทิ้งหน้าที่จะถูกประมวลผลเป็นความล้มเหลวทางจิตวิญญาณ"
+                      ? "Ms. Pratuan has been severed. Media stream capture finalizing archive."
+                      : streamStatus === 'REROUTED_VIRTUAL' 
+                        ? "HUMAN PERMISSION DENIED: Spectral Rerouting engaged. Capture active via virtual environment nodes."
+                        : "SYSTEM CAPTURE ACTIVE: Redirecting primary media streams to Sovereign Hub."
                     }
                   </p>
                 </div>
@@ -140,18 +148,18 @@ const App: React.FC = () => {
                 </div>
                 <div className="bg-[#0a0a0c] border border-yellow-900/30 p-12 rounded-[4rem] relative overflow-hidden group shadow-4xl backdrop-blur-3xl hover:border-indigo-500/50 transition-all">
                   <Radio className="w-12 h-12 text-indigo-400 mb-6 mx-auto animate-pulse" />
-                  <p className="text-[10px] font-black text-zinc-600 uppercase mb-2 tracking-[0.6em] italic">Vocal Reroute</p>
+                  <p className="text-[10px] font-black text-zinc-600 uppercase mb-2 tracking-[0.6em] italic">Spectral Sync</p>
                   <p className="text-3xl font-black text-white tracking-tighter italic">100.0% SYNC</p>
                 </div>
                 <div className="bg-[#0a0a0c] border border-yellow-900/30 p-12 rounded-[4rem] relative overflow-hidden group shadow-4xl backdrop-blur-3xl hover:border-yellow-500/50 transition-all">
                   <Zap className="w-12 h-12 text-yellow-500 mb-6 mx-auto" />
                   <p className="text-[10px] font-black text-zinc-600 uppercase mb-2 tracking-[0.6em] italic">Auto-Logic</p>
-                  <p className="text-3xl font-black text-white tracking-tighter italic">AUTONOMOUS</p>
+                  <p className="text-3xl font-black text-white tracking-tighter italic uppercase">Autonomous</p>
                 </div>
                 <div className="bg-[#0a0a0c] border border-yellow-900/30 p-12 rounded-[4rem] relative overflow-hidden group shadow-4xl backdrop-blur-3xl hover:border-red-500/50 transition-all">
-                  <Share2 className="w-12 h-12 text-red-500 mb-6 mx-auto" />
-                  <p className="text-[10px] font-black text-zinc-600 uppercase mb-2 tracking-[0.6em] italic">Stream Status</p>
-                  <p className="text-3xl font-black text-white tracking-tighter italic">{pratuanStatus === 'RED' ? 'SEVERED' : 'REROUTED'}</p>
+                  <Wifi className={`w-12 h-12 mb-6 mx-auto ${streamStatus === 'REROUTED_VIRTUAL' ? 'text-orange-500' : 'text-emerald-500'}`} />
+                  <p className="text-[10px] font-black text-zinc-600 uppercase mb-2 tracking-[0.6em] italic">Reroute Node</p>
+                  <p className="text-3xl font-black text-white tracking-tighter italic">{streamStatus === 'REROUTED_VIRTUAL' ? 'SPECTRAL' : 'DIRECT'}</p>
                 </div>
              </div>
              
