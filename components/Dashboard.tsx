@@ -4,7 +4,7 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { 
   Activity, ShieldCheck, Zap, Lock, Globe, Database, Eye, Landmark, 
   Sparkles, Camera, Mic, Handshake, Server, Cpu, Rocket, Gamepad2, 
-  Bot, CreditCard, Link, ShieldAlert
+  Bot, CreditCard, Link, ShieldAlert, Scan, Wifi
 } from 'lucide-react';
 
 const solutionData = [
@@ -45,9 +45,10 @@ const Dashboard: React.FC = () => {
               SUPER 3MAX PRO DE PRO PLUS
             </h1>
             <h2 className="text-3xl font-black text-white/90 uppercase tracking-[0.4em] italic flex items-center gap-6">
-              OMNI-CONVERGENCE HUB
+              OMNI-REALITY HUB
               <div className="w-4 h-4 rounded-full bg-red-600 animate-ping"></div>
             </h2>
+            <p className="text-yellow-600 text-[10px] font-black uppercase tracking-[1em] italic">ALL'S IS REALITY • ไม่เพียงแต่เหมือนแต่เป็นจริง</p>
           </div>
         </div>
         
@@ -62,18 +63,18 @@ const Dashboard: React.FC = () => {
             <span className="text-lg font-black text-white uppercase tracking-[0.3em]">WHITE/GREY/BLACK</span>
           </div>
           <div className="flex flex-col items-center px-12 relative z-10">
-            <span className="text-[11px] font-black text-zinc-600 uppercase tracking-[0.5em] mb-2">Digital Core</span>
-            <span className="text-lg font-black text-indigo-400 uppercase tracking-[0.4em] gold-shimmer italic">OMNISCIENCE</span>
+            <span className="text-[11px] font-black text-zinc-600 uppercase tracking-[0.5em] mb-2">Bypass Node</span>
+            <span className="text-lg font-black text-indigo-400 uppercase tracking-[0.4em] gold-shimmer italic">SPECTRAL_READY</span>
           </div>
         </div>
       </div>
 
       {/* CORE PERFORMANCE METRICS */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 px-6">
-        <StatCard title="Mirror Visibility" value="100%" icon={Eye} color="text-yellow-500" detail="REALITY_LOCKED" shimmer />
-        <StatCard title="Technical Load" value="HYPER" icon={Cpu} color="text-indigo-400" detail="VPS_TUNED_MAX" />
-        <StatCard title="Bot Efficiency" value="DE PRO" icon={Bot} color="text-emerald-400" detail="24/7_ACTIVE" />
-        <StatCard title="Gateway Flow" value="ENCRYPT" icon={CreditCard} color="text-red-500" detail="ZERO_TRACE" />
+        <StatCard title="Bypass Integrity" value="100%" icon={Wifi} color="text-yellow-500" detail="REALITY_LOCKED" shimmer />
+        <StatCard title="Reality Load" value="HYPER" icon={Activity} color="text-indigo-400" detail="V11.5_SYNCED" />
+        <StatCard title="Bot Presence" value="ABSOLUTE" icon={Bot} color="text-emerald-400" detail="REALITY_ANCHORED" />
+        <StatCard title="Grid Flow" value="PURE" icon={Scan} color="text-red-500" detail="BYPASS_ACTIVE" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 px-6">
@@ -83,12 +84,12 @@ const Dashboard: React.FC = () => {
             <div className="flex items-center gap-6">
                <Rocket className="w-10 h-10 text-indigo-500 animate-pulse glow-gold" />
                <h3 className="text-lg font-black uppercase tracking-[0.6em] text-zinc-300 italic">
-                 SOVEREIGN BLUEPRINT METRIC [LIVE]
+                 REALITY SYNC METRIC [LIVE]
                </h3>
             </div>
             <div className="flex items-center gap-6 bg-zinc-900/80 px-8 py-3 rounded-full border border-yellow-900/20 shadow-2xl">
                <div className="w-2.5 h-2.5 rounded-full bg-yellow-500 animate-ping"></div>
-               <span className="text-[11px] font-mono text-yellow-500 font-bold uppercase tracking-widest italic">All Nodes Active</span>
+               <span className="text-[11px] font-mono text-yellow-500 font-bold uppercase tracking-widest italic">All Reality Nodes Active</span>
             </div>
           </div>
           <div className="h-[450px] w-full">
@@ -118,16 +119,16 @@ const Dashboard: React.FC = () => {
           <div className="flex items-center gap-6 mb-12">
             <Activity className="w-8 h-8 text-indigo-500 animate-pulse glow-red" />
             <h3 className="text-xs font-black uppercase tracking-[0.4em] text-zinc-400 italic">
-              OMNI_CONVERGENCE_LOG
+              OMNI_REALITY_LOG
             </h3>
           </div>
           <div className="space-y-10 flex-1">
             {[
-              { label: 'VPS HYPER-SYNC', val: 'TUNING_ABSOLUTE', status: 'HYPER', color: 'text-indigo-400' },
-              { label: 'BOT CLUSTER X', val: 'TASK_GEN_4_STEALTH', status: 'SYNCED', color: 'text-yellow-500' },
-              { label: 'GAME SERVER Hub', val: 'SURVIVAL_NODE_1', status: 'ACTIVE', color: 'text-emerald-400' },
-              { label: 'PAYMENT BRIDGE', val: 'ENCRYPTED_FLOW_V2', status: 'SECURE', color: 'text-red-400' },
-              { label: 'WP SOVEREIGN', val: 'AUTO_DEFENSE_LOCKED', status: 'MASTER', color: 'text-indigo-400' },
+              { label: 'REALITY BYPASS', val: 'SPECTRAL_NODE_V11', status: 'BYPASS', color: 'text-indigo-400' },
+              { label: 'BOT CLUSTER REALITY', val: 'ABSOLUTE_PRESENCE', status: 'SYNCED', color: 'text-yellow-500' },
+              { label: 'GRID SATURATION', val: 'ICTV_OVERRIDE_ACTIVE', status: 'ACTIVE', color: 'text-emerald-400' },
+              { label: 'PERMISSION DENIED', val: 'AUTO_BYPASS_ENGAGED', status: 'OVERRIDE', color: 'text-red-400' },
+              { label: 'KERNEL SOVEREIGNTY', val: 'LOCKED_ABSOLUTE', status: 'MASTER', color: 'text-indigo-400' },
             ].map((log, i) => (
               <div key={i} className="bg-black/60 border border-yellow-900/10 p-8 rounded-[3rem] relative overflow-hidden shadow-inner group-hover:border-yellow-500/40 transition-all duration-500">
                 <div className="flex justify-between items-start">
@@ -145,7 +146,7 @@ const Dashboard: React.FC = () => {
           <div className="mt-12 pt-12 border-t border-yellow-900/10 text-center">
              <div className="flex items-center justify-center gap-4">
                <div className="w-3 h-3 rounded-full bg-indigo-500 animate-ping"></div>
-               <p className="text-sm font-black text-white italic tracking-[0.3em] uppercase">SYSTEM: [CONVERGENCE_100%]</p>
+               <p className="text-sm font-black text-white italic tracking-[0.3em] uppercase">REALITY: [100% TRUE]</p>
              </div>
           </div>
         </div>
